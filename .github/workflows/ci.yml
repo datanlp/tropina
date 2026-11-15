@@ -53,7 +53,7 @@ jobs:
           retention-days: 7
 
   preview:
-    name: Preview screenshots (LOREM data, real map tiles)
+    name: Preview screenshots and Lighthouse (LOREM data, real map tiles)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -68,8 +68,14 @@ jobs:
           npx next start -p 3100 &
           npx wait-on http://localhost:3100/en/poland/christmas-markets
           node scripts/screenshots.mjs
+          npm run lighthouse
+        env:
+          LIGHTHOUSE_PAGES: /en/poland/christmas-markets,/ru/poland/christmas-markets,/en/poland/christmas-markets/krakow/lorem-ipsum,/uk/poland/christmas-markets/gdansk/lorem-ipsum
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
-          name: screenshots
-          path: screenshots/
+          name: screenshots-and-lighthouse
+          path: |
+            screenshots/
+            lighthouse/
           retention-days: 14
