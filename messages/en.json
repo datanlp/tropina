@@ -1,0 +1,43 @@
+{
+  "Metadata": {
+    "siteName": "Tropina",
+    "marketsTitle": "Christmas markets in Poland",
+    "marketsDescription": "Where Christmas markets are in Poland, when they are open, what to eat and how to get there."
+  },
+  "Layout": {
+    "skipToContent": "Skip to content",
+    "homeLink": "Tropina, Christmas markets in Poland"
+  },
+  "LocaleSwitcher": {
+    "label": "Language",
+    "names": { "en": "English", "pl": "Polski", "ru": "Русский", "uk": "Українська" }
+  },
+  "MarketsPage": {
+    "title": "Christmas markets in Poland",
+    "intro": "Where the markets are, when they are open, what to eat and how to get there.",
+    "empty": "Markets for this season are coming soon."
+  },
+  "CityPage": {
+    "title": "Christmas markets in {city}",
+    "back": "All markets in Poland"
+  },
+  "MarketPage": {
+    "dates": "Dates",
+    "hours": "Opening hours",
+    "hoursRow": "{days}: {open}–{close}",
+    "food": "What to eat",
+    "officialSite": "Official website",
+    "lastChecked": "Dates checked on {date}",
+    "suggestedBy": "Suggested by {nick}",
+    "back": "All markets in {city}"
+  },
+  "MarketStatus": {
+    "unverified": "Dates not yet confirmed by the organiser",
+    "verified": "Dates confirmed with the official source"
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "text": "This page does not exist or has moved.",
+    "home": "Go to Christmas markets in Poland"
+  }
+}

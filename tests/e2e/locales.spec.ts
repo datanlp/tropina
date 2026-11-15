@@ -69,6 +69,12 @@ test.describe("redirects", () => {
     expect(res?.status()).toBe(404);
   });
 
+  test("an unknown city returns 404", async ({ page }) => {
+    const res = await page.goto("/uk/poland/christmas-markets/atlantis");
+    expect(res?.status()).toBe(404);
+    await expect(page.locator("html")).toHaveAttribute("lang", "uk");
+  });
+
   test("an unknown language returns 404", async ({ page }) => {
     const res = await page.goto("/de/poland/christmas-markets");
     expect(res?.status()).toBe(404);

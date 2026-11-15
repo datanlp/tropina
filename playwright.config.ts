@@ -11,6 +11,10 @@ export default defineConfig({
   use: {
     baseURL: `http://localhost:${PORT}`,
     trace: "off",
+    // Optional: use an already installed Chromium instead of `playwright install`.
+    launchOptions: process.env.PW_CHROMIUM_PATH
+      ? { executablePath: process.env.PW_CHROMIUM_PATH }
+      : {},
   },
   projects: [
     { name: "desktop", use: { ...devices["Desktop Chrome"] } },
