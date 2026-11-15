@@ -29,6 +29,11 @@ export default async function MarketsPage() {
       dateStyle: "long",
     }),
     verified: m.verified,
+    schedule: {
+      season: m.season,
+      openingHours: m.openingHours,
+      hoursExceptions: m.hoursExceptions,
+    },
   }));
 
   return (

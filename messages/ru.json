@@ -69,5 +69,18 @@
     "CooperativeGesturesHandler.WindowsHelpText": "Чтобы приблизить карту, используйте Ctrl + колесо",
     "CooperativeGesturesHandler.MacHelpText": "Чтобы приблизить карту, используйте ⌘ + колесо",
     "CooperativeGesturesHandler.MobileHelpText": "Двигайте карту двумя пальцами"
+  },
+  "Filters": {
+    "legend": "Показать",
+    "openNow": "Открыто сейчас",
+    "weekend": "В эти выходные",
+    "all": "Все",
+    "noResults": "Сейчас под этот фильтр не подходит ни одна ярмарка."
+  },
+  "SeasonStatus": {
+    "openNow": "Открыто сейчас",
+    "closedNow": "Сейчас закрыто",
+    "upcoming": "Сезон ещё не начался",
+    "over": "Сезон закончился, ждём в следующем году!"
   }
 }

@@ -47,6 +47,15 @@ export const marketSchema = z
         }),
       )
       .min(1),
+    /** Machine-readable exceptions (24–26 Dec etc.) used by "open now". */
+    hoursExceptions: z
+      .array(
+        z.union([
+          z.strictObject({ date: isoDate, closed: z.literal(true) }),
+          z.strictObject({ date: isoDate, open: time, close: time }),
+        ]),
+      )
+      .optional(),
     hoursNote: l10nSchema.optional(),
     food: z.array(z.strictObject({ name: l10nSchema, note: l10nSchema.optional() })),
     description: l10nSchema,

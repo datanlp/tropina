@@ -69,5 +69,18 @@
     "CooperativeGesturesHandler.WindowsHelpText": "Щоб наблизити мапу, використовуйте Ctrl + коліщатко",
     "CooperativeGesturesHandler.MacHelpText": "Щоб наблизити мапу, використовуйте ⌘ + коліщатко",
     "CooperativeGesturesHandler.MobileHelpText": "Рухайте мапу двома пальцями"
+  },
+  "Filters": {
+    "legend": "Показати",
+    "openNow": "Відкрито зараз",
+    "weekend": "Цими вихідними",
+    "all": "Усі",
+    "noResults": "Зараз під цей фільтр не підходить жоден ярмарок."
+  },
+  "SeasonStatus": {
+    "openNow": "Відкрито зараз",
+    "closedNow": "Зараз зачинено",
+    "upcoming": "Сезон ще не почався",
+    "over": "Сезон закінчився, чекаємо наступного року!"
   }
 }

@@ -335,3 +335,74 @@ h1 {
     height: 70vh;
   }
 }
+
+/* ---------- Filters and status (stage 3) ---------- */
+
+.filters {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.filters legend {
+  float: left;
+  margin-right: 0.5rem;
+  font-weight: 600;
+}
+
+.filters label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 44px;
+  padding: 0 0.9rem;
+  border: 2px solid var(--color-border);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.filters label:has(input:checked) {
+  border-color: var(--color-text);
+  font-weight: 700;
+}
+
+.filters input {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--color-accent);
+}
+
+.filters label:has(input:focus-visible) {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.explorer__empty {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+.status {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius);
+  font-weight: 700;
+  border: 2px solid currentColor;
+}
+
+.status--openNow {
+  color: var(--color-ok-text);
+  background: var(--color-ok-bg);
+}
+
+.status--closedNow,
+.status--upcoming,
+.status--over {
+  color: var(--color-warn-text);
+  background: var(--color-warn-bg);
+}
