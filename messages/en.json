@@ -82,5 +82,12 @@
     "closedNow": "Closed right now",
     "upcoming": "The season has not started yet",
     "over": "This season is over. See you next year!"
+  },
+  "Install": {
+    "title": "Install Tropina",
+    "iosSteps": "Tap Share, then “Add to Home Screen”.",
+    "otherText": "Add Tropina to your home screen to open market cards without the internet.",
+    "install": "Install",
+    "dismiss": "Not now"
   }
 }

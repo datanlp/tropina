@@ -82,5 +82,12 @@
     "closedNow": "Teraz zamknięte",
     "upcoming": "Sezon jeszcze się nie zaczął",
     "over": "Ten sezon się skończył. Do zobaczenia w przyszłym roku!"
+  },
+  "Install": {
+    "title": "Zainstaluj Tropinę",
+    "iosSteps": "Stuknij „Udostępnij”, a potem „Do ekranu początkowego”.",
+    "otherText": "Dodaj Tropinę do ekranu początkowego, żeby otwierać karty jarmarków bez internetu.",
+    "install": "Zainstaluj",
+    "dismiss": "Nie teraz"
   }
 }

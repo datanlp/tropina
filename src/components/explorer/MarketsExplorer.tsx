@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Link } from "@/i18n/navigation";
+import { track } from "@/lib/analytics";
 import { type MarketFilter, matchesFilter } from "@/lib/schedule";
 import { useNow } from "@/lib/use-now";
 import type { MarketPin } from "./types";
@@ -40,7 +41,10 @@ export function MarketsExplorer({ pins }: { pins: MarketPin[] }) {
               name="market-filter"
               value={value}
               checked={filter === value}
-              onChange={() => setFilter(value)}
+              onChange={() => {
+                setFilter(value);
+                track("filter_change", { filter: value });
+              }}
             />
             {label}
           </label>
