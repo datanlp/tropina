@@ -24,9 +24,10 @@ the owner, this file wins.
 - MapLibre GL JS + OpenFreeMap (`https://tiles.openfreemap.org/styles/liberty`), no API
   keys, OpenStreetMap attribution required.
 - next-intl (locale from `next/root-params`), zod, data in the repo, no backend.
-- PWA via `app/manifest.ts` + a service worker; pick the SW library only after checking
-  it supports our Next version.
-- Cookie-free analytics (Umami or Plausible) behind `track(event, props)`.
+- PWA via `app/manifest.ts` + a hand-written `public/sw.js` (Serwist 9.5 breaks with Cache
+  Components). Pages it saves offline come from `app/offline-pages.json/route.ts`.
+- Cookie-free analytics behind `track(event, props)` (`src/lib/analytics.ts`): Umami Cloud
+  (free tier), on only when `NEXT_PUBLIC_UMAMI_WEBSITE_ID` is set.
 - Hosting on Vercel, but nothing Vercel-specific.
 - Not now: backend, Supabase, logins, Mapy.com, own routing, cookies, year in URLs.
 

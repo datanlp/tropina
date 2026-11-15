@@ -3,7 +3,10 @@ import { getFormatter, getLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { SeasonDates } from "@/components/SeasonDates";
 import { SeasonStatus } from "@/components/SeasonStatus";
+import { TrackedLink } from "@/components/TrackedLink";
 import { VerificationBadge } from "@/components/VerificationBadge";
+import { MarketVisit } from "@/components/pwa/MarketVisit";
+import { rememberCardScript } from "@/components/pwa/install-state";
 import { findMarket, markets } from "@/data/markets";
 import { Link } from "@/i18n/navigation";
 import { calendarDate, weekdayDate, weekdayRanges } from "@/lib/dates";
@@ -126,16 +129,31 @@ export default async function MarketPage({ params }: Props) {
       )}
 
       <p className="actions">
-        <a className="button" href={directionsUrl(m.location)} rel="noopener">
+        <TrackedLink
+          className="button"
+          href={directionsUrl(m.location)}
+          rel="noopener"
+          event="directions_click"
+          props={{ market: m.id }}
+        >
           {t("directions")}
-        </a>
-        <a className="button button--secondary" href={m.officialUrl} rel="noopener">
+        </TrackedLink>
+        <TrackedLink
+          className="button button--secondary"
+          href={m.officialUrl}
+          rel="noopener"
+          event="official_link_click"
+          props={{ market: m.id }}
+        >
           {t("officialSite")}
-        </a>
+        </TrackedLink>
       </p>
       <p className="muted">{m.location.address}</p>
 
       {m.suggestedBy && <p className="muted">{t("suggestedBy", { nick: m.suggestedBy })}</p>}
+
+      <script dangerouslySetInnerHTML={{ __html: rememberCardScript(m.id) }} />
+      <MarketVisit marketId={m.id} />
     </article>
   );
 }
