@@ -8,7 +8,8 @@ import { findMarket, markets } from "@/data/markets";
 import { Link } from "@/i18n/navigation";
 import { calendarDate, weekdayDate, weekdayRanges } from "@/lib/dates";
 import { directionsUrl } from "@/lib/directions";
-import { cityPath } from "@/lib/paths";
+import { cityPath, marketPath } from "@/lib/paths";
+import { alternatesFor, jsonLdScript, marketEventJsonLd } from "@/lib/seo";
 import { staticParamsOrPlaceholder } from "@/lib/static-params";
 
 type Props = PageProps<"/[locale]/poland/christmas-markets/[city]/[market]">;
@@ -25,7 +26,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const m = findMarket(city, market);
   if (!m) return {};
   const locale = await getLocale();
-  return { title: m.name[locale], description: m.description[locale] };
+  return {
+    title: m.name[locale],
+    description: m.description[locale],
+    alternates: alternatesFor(marketPath(m), locale),
+    openGraph: {
+      title: m.name[locale],
+      description: m.description[locale],
+      url: alternatesFor(marketPath(m), locale).canonical,
+      siteName: "Tropina",
+      locale,
+      type: "website",
+    },
+  };
 }
 
 export default async function MarketPage({ params }: Props) {
@@ -47,6 +60,10 @@ export default async function MarketPage({ params }: Props) {
 
   return (
     <article>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdScript(marketEventJsonLd(m, locale)) }}
+      />
       <p>
         <Link href={cityPath(m.city.slug)}>{t("back", { city: m.city.name[locale] })}</Link>
       </p>
