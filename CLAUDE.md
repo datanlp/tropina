@@ -50,6 +50,10 @@ the owner, this file wins.
   coordinates or any of the four translations (`npm run validate:data` runs before build).
 - TEST records live in `src/data/markets/test/` and are included only when
   `TROPINA_INCLUDE_TEST_DATA=1` (dev, e2e). Never in a production build.
+- LOREM placeholders for the eight launch cities live in `src/data/markets/placeholder/`
+  (owner's request, 2026-11-15) and are included only with
+  `TROPINA_INCLUDE_PLACEHOLDER_DATA=1` (`npm run dev`, `npm run preview`). Not in e2e or
+  production. Delete the folder when the real cards arrive.
 - `verified: false` dates are always shown with an explicit note.
 
 ## Accessibility (WCAG 2.2 AA from day one)

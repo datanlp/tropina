@@ -8,6 +8,8 @@ const nextConfig: NextConfig = {
   // build either contains the TEST records everywhere or nowhere.
   env: {
     TROPINA_INCLUDE_TEST_DATA: process.env.TROPINA_INCLUDE_TEST_DATA === "1" ? "1" : "0",
+    TROPINA_INCLUDE_PLACEHOLDER_DATA:
+      process.env.TROPINA_INCLUDE_PLACEHOLDER_DATA === "1" ? "1" : "0",
   },
 };
 

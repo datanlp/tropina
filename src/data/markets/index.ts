@@ -1,4 +1,5 @@
 import { type Market, marketListSchema } from "@/data/schema";
+import { loremMarkets } from "./placeholder/lorem";
 import { krakowTestRynekGlowny } from "./test/krakow-test-rynek-glowny";
 import { wroclawTestRynek } from "./test/wroclaw-test-rynek";
 
@@ -9,14 +10,28 @@ const realMarkets: Market[] = [];
 const testMarkets: Market[] = [krakowTestRynekGlowny, wroclawTestRynek];
 
 /** Validates with zod and throws on any error, so a bad record fails the build. */
-export function loadMarkets({ includeTest }: { includeTest: boolean }): Market[] {
-  const list = includeTest ? [...realMarkets, ...testMarkets] : realMarkets;
-  return marketListSchema.parse(list);
+export function loadMarkets({
+  includeTest,
+  includePlaceholders = false,
+}: {
+  includeTest: boolean;
+  /** LOREM placeholders for the eight launch cities (dev only). */
+  includePlaceholders?: boolean;
+}): Market[] {
+  return marketListSchema.parse([
+    ...realMarkets,
+    ...(includeTest ? testMarkets : []),
+    ...(includePlaceholders ? loremMarkets : []),
+  ]);
 }
 
 export const includeTestData = process.env.TROPINA_INCLUDE_TEST_DATA === "1";
+export const includePlaceholderData = process.env.TROPINA_INCLUDE_PLACEHOLDER_DATA === "1";
 
-export const markets: Market[] = loadMarkets({ includeTest: includeTestData });
+export const markets: Market[] = loadMarkets({
+  includeTest: includeTestData,
+  includePlaceholders: includePlaceholderData,
+});
 
 export type City = Market["city"] & { markets: Market[] };
 
