@@ -1,0 +1,43 @@
+{
+  "Metadata": {
+    "siteName": "Tropina",
+    "marketsTitle": "Jarmarki bożonarodzeniowe w Polsce",
+    "marketsDescription": "Gdzie w Polsce są jarmarki bożonarodzeniowe, kiedy działają, co zjeść i jak dojechać."
+  },
+  "Layout": {
+    "skipToContent": "Przejdź do treści",
+    "homeLink": "Tropina, jarmarki bożonarodzeniowe w Polsce"
+  },
+  "LocaleSwitcher": {
+    "label": "Język",
+    "names": { "en": "English", "pl": "Polski", "ru": "Русский", "uk": "Українська" }
+  },
+  "MarketsPage": {
+    "title": "Jarmarki bożonarodzeniowe w Polsce",
+    "intro": "Gdzie są jarmarki, kiedy działają, co zjeść i jak dojechać.",
+    "empty": "Jarmarki na ten sezon pojawią się wkrótce."
+  },
+  "CityPage": {
+    "title": "Jarmarki bożonarodzeniowe: {city}",
+    "back": "Wszystkie jarmarki w Polsce"
+  },
+  "MarketPage": {
+    "dates": "Daty",
+    "hours": "Godziny otwarcia",
+    "hoursRow": "{days}: {open}–{close}",
+    "food": "Co zjeść",
+    "officialSite": "Oficjalna strona",
+    "lastChecked": "Daty sprawdzone {date}",
+    "suggestedBy": "Polecił(a) {nick}",
+    "back": "Wszystkie jarmarki: {city}"
+  },
+  "MarketStatus": {
+    "unverified": "Daty nie są jeszcze potwierdzone przez organizatora",
+    "verified": "Daty potwierdzone w oficjalnym źródle"
+  },
+  "NotFound": {
+    "title": "Nie znaleziono strony",
+    "text": "Ta strona nie istnieje lub została przeniesiona.",
+    "home": "Przejdź do jarmarków bożonarodzeniowych w Polsce"
+  }
+}
