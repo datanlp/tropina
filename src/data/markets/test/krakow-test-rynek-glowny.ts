@@ -44,6 +44,18 @@ export const krakowTestRynekGlowny: Market = {
     ru: "Запись TEST для разработки. Это не настоящие данные.",
     uk: "Запис TEST для розробки. Це не справжні дані.",
   },
+  transport: {
+    en: "TEST: trams 1, 6, 8 to Plac Wszystkich Świętych.",
+    pl: "TEST: tramwaje 1, 6, 8 do Placu Wszystkich Świętych.",
+    ru: "TEST: трамваи 1, 6, 8 до Plac Wszystkich Świętych.",
+    uk: "TEST: трамваї 1, 6, 8 до Plac Wszystkich Świętych.",
+  },
+  accessibility: {
+    en: "TEST: flat square, cobblestones.",
+    pl: "TEST: płaski plac, bruk.",
+    ru: "TEST: ровная площадь, брусчатка.",
+    uk: "TEST: рівна площа, бруківка.",
+  },
   officialUrl: "https://example.com/",
   verified: true,
   lastChecked: "2026-11-15",

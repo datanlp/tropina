@@ -10,7 +10,12 @@
   },
   "LocaleSwitcher": {
     "label": "Мова",
-    "names": { "en": "English", "pl": "Polski", "ru": "Русский", "uk": "Українська" }
+    "names": {
+      "en": "English",
+      "pl": "Polski",
+      "ru": "Русский",
+      "uk": "Українська"
+    }
   },
   "MarketsPage": {
     "title": "Різдвяні ярмарки Польщі",
@@ -29,7 +34,10 @@
     "officialSite": "Офіційний сайт",
     "lastChecked": "Дати перевірено {date}",
     "suggestedBy": "Порадив(ла) {nick}",
-    "back": "Усі ярмарки: {city}"
+    "back": "Усі ярмарки: {city}",
+    "directions": "Як дістатися",
+    "transport": "Транспорт",
+    "accessibility": "Доступність"
   },
   "MarketStatus": {
     "unverified": "Дати ще не підтверджені організатором",
@@ -39,5 +47,27 @@
     "title": "Сторінку не знайдено",
     "text": "Такої сторінки немає або її перенесено.",
     "home": "До різдвяних ярмарків Польщі"
+  },
+  "Explorer": {
+    "mapLabel": "Мапа різдвяних ярмарків",
+    "listLabel": "Різдвяні ярмарки",
+    "viewSwitch": "Показати як",
+    "viewMap": "Мапа",
+    "viewList": "Список",
+    "showOnMap": "Показати на мапі",
+    "selected": "Вибрано",
+    "openCard": "Відкрити сторінку ярмарку",
+    "mapUnavailable": "Мапу не вдалося завантажити. Усі ярмарки є у списку."
+  },
+  "MapUi": {
+    "Map.Title": "Мапа",
+    "NavigationControl.ZoomIn": "Наблизити",
+    "NavigationControl.ZoomOut": "Віддалити",
+    "NavigationControl.ResetBearing": "Повернути на північ",
+    "AttributionControl.ToggleAttribution": "Показати джерела мапи",
+    "Popup.Close": "Закрити",
+    "CooperativeGesturesHandler.WindowsHelpText": "Щоб наблизити мапу, використовуйте Ctrl + коліщатко",
+    "CooperativeGesturesHandler.MacHelpText": "Щоб наблизити мапу, використовуйте ⌘ + коліщатко",
+    "CooperativeGesturesHandler.MobileHelpText": "Рухайте мапу двома пальцями"
   }
 }

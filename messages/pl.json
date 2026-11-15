@@ -10,7 +10,12 @@
   },
   "LocaleSwitcher": {
     "label": "Język",
-    "names": { "en": "English", "pl": "Polski", "ru": "Русский", "uk": "Українська" }
+    "names": {
+      "en": "English",
+      "pl": "Polski",
+      "ru": "Русский",
+      "uk": "Українська"
+    }
   },
   "MarketsPage": {
     "title": "Jarmarki bożonarodzeniowe w Polsce",
@@ -29,7 +34,10 @@
     "officialSite": "Oficjalna strona",
     "lastChecked": "Daty sprawdzone {date}",
     "suggestedBy": "Polecił(a) {nick}",
-    "back": "Wszystkie jarmarki: {city}"
+    "back": "Wszystkie jarmarki: {city}",
+    "directions": "Jak dojechać",
+    "transport": "Dojazd",
+    "accessibility": "Dostępność"
   },
   "MarketStatus": {
     "unverified": "Daty nie są jeszcze potwierdzone przez organizatora",
@@ -39,5 +47,27 @@
     "title": "Nie znaleziono strony",
     "text": "Ta strona nie istnieje lub została przeniesiona.",
     "home": "Przejdź do jarmarków bożonarodzeniowych w Polsce"
+  },
+  "Explorer": {
+    "mapLabel": "Mapa jarmarków bożonarodzeniowych",
+    "listLabel": "Jarmarki bożonarodzeniowe",
+    "viewSwitch": "Pokaż jako",
+    "viewMap": "Mapa",
+    "viewList": "Lista",
+    "showOnMap": "Pokaż na mapie",
+    "selected": "Wybrany",
+    "openCard": "Otwórz stronę jarmarku",
+    "mapUnavailable": "Nie udało się wczytać mapy. Wszystkie jarmarki są na liście."
+  },
+  "MapUi": {
+    "Map.Title": "Mapa",
+    "NavigationControl.ZoomIn": "Przybliż",
+    "NavigationControl.ZoomOut": "Oddal",
+    "NavigationControl.ResetBearing": "Ustaw północ",
+    "AttributionControl.ToggleAttribution": "Pokaż źródła mapy",
+    "Popup.Close": "Zamknij",
+    "CooperativeGesturesHandler.WindowsHelpText": "Użyj Ctrl + kółko, aby przybliżyć mapę",
+    "CooperativeGesturesHandler.MacHelpText": "Użyj ⌘ + kółko, aby przybliżyć mapę",
+    "CooperativeGesturesHandler.MobileHelpText": "Przesuń mapę dwoma palcami"
   }
 }

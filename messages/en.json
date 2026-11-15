@@ -10,7 +10,12 @@
   },
   "LocaleSwitcher": {
     "label": "Language",
-    "names": { "en": "English", "pl": "Polski", "ru": "Русский", "uk": "Українська" }
+    "names": {
+      "en": "English",
+      "pl": "Polski",
+      "ru": "Русский",
+      "uk": "Українська"
+    }
   },
   "MarketsPage": {
     "title": "Christmas markets in Poland",
@@ -29,7 +34,10 @@
     "officialSite": "Official website",
     "lastChecked": "Dates checked on {date}",
     "suggestedBy": "Suggested by {nick}",
-    "back": "All markets in {city}"
+    "back": "All markets in {city}",
+    "directions": "Directions",
+    "transport": "How to get there",
+    "accessibility": "Accessibility"
   },
   "MarketStatus": {
     "unverified": "Dates not yet confirmed by the organiser",
@@ -39,5 +47,27 @@
     "title": "Page not found",
     "text": "This page does not exist or has moved.",
     "home": "Go to Christmas markets in Poland"
+  },
+  "Explorer": {
+    "mapLabel": "Map of Christmas markets",
+    "listLabel": "Christmas markets",
+    "viewSwitch": "Show as",
+    "viewMap": "Map",
+    "viewList": "List",
+    "showOnMap": "Show on map",
+    "selected": "Selected",
+    "openCard": "Open market page",
+    "mapUnavailable": "The map could not be loaded. All markets are in the list."
+  },
+  "MapUi": {
+    "Map.Title": "Map",
+    "NavigationControl.ZoomIn": "Zoom in",
+    "NavigationControl.ZoomOut": "Zoom out",
+    "NavigationControl.ResetBearing": "Reset north",
+    "AttributionControl.ToggleAttribution": "Show map credits",
+    "Popup.Close": "Close",
+    "CooperativeGesturesHandler.WindowsHelpText": "Use Ctrl + scroll to zoom the map",
+    "CooperativeGesturesHandler.MacHelpText": "Use ⌘ + scroll to zoom the map",
+    "CooperativeGesturesHandler.MobileHelpText": "Use two fingers to move the map"
   }
 }

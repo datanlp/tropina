@@ -6,6 +6,7 @@ import { VerificationBadge } from "@/components/VerificationBadge";
 import { findMarket, markets } from "@/data/markets";
 import { Link } from "@/i18n/navigation";
 import { calendarDate, weekdayDate, weekdayRanges } from "@/lib/dates";
+import { directionsUrl } from "@/lib/directions";
 import { cityPath } from "@/lib/paths";
 import { staticParamsOrPlaceholder } from "@/lib/static-params";
 
@@ -84,11 +85,29 @@ export default async function MarketPage({ params }: Props) {
         </>
       )}
 
-      <p>
-        <a className="button" href={m.officialUrl} rel="noopener">
+      {m.transport && (
+        <>
+          <h2>{t("transport")}</h2>
+          <p>{m.transport[locale]}</p>
+        </>
+      )}
+
+      {m.accessibility && (
+        <>
+          <h2>{t("accessibility")}</h2>
+          <p>{m.accessibility[locale]}</p>
+        </>
+      )}
+
+      <p className="actions">
+        <a className="button" href={directionsUrl(m.location)} rel="noopener">
+          {t("directions")}
+        </a>
+        <a className="button button--secondary" href={m.officialUrl} rel="noopener">
           {t("officialSite")}
         </a>
       </p>
+      <p className="muted">{m.location.address}</p>
 
       {m.suggestedBy && <p className="muted">{t("suggestedBy", { nick: m.suggestedBy })}</p>}
     </article>
