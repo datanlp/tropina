@@ -90,3 +90,21 @@ describe("market schema", () => {
     expect(marketListSchema.safeParse([validMarket(), validMarket()]).success).toBe(false);
   });
 });
+
+describe("hours exceptions", () => {
+  it("accepts closed days and special hours", () => {
+    const m = {
+      ...validMarket(),
+      hoursExceptions: [
+        { date: "2026-12-24", open: "10:00", close: "14:00" },
+        { date: "2026-12-25", closed: true },
+      ],
+    };
+    expect(marketSchema.safeParse(m).success).toBe(true);
+  });
+
+  it("rejects an exception without hours or closed flag", () => {
+    const m = { ...validMarket(), hoursExceptions: [{ date: "2026-12-24" }] };
+    expect(marketSchema.safeParse(m).success).toBe(false);
+  });
+});

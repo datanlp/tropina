@@ -69,5 +69,18 @@
     "CooperativeGesturesHandler.WindowsHelpText": "Użyj Ctrl + kółko, aby przybliżyć mapę",
     "CooperativeGesturesHandler.MacHelpText": "Użyj ⌘ + kółko, aby przybliżyć mapę",
     "CooperativeGesturesHandler.MobileHelpText": "Przesuń mapę dwoma palcami"
+  },
+  "Filters": {
+    "legend": "Pokaż",
+    "openNow": "Otwarte teraz",
+    "weekend": "W ten weekend",
+    "all": "Wszystkie",
+    "noResults": "Żaden jarmark nie pasuje teraz do tego filtra."
+  },
+  "SeasonStatus": {
+    "openNow": "Otwarte teraz",
+    "closedNow": "Teraz zamknięte",
+    "upcoming": "Sezon jeszcze się nie zaczął",
+    "over": "Ten sezon się skończył. Do zobaczenia w przyszłym roku!"
   }
 }

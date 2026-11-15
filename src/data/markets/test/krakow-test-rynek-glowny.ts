@@ -18,6 +18,10 @@ export const krakowTestRynekGlowny: Market = {
   location: { lat: 50.0617, lng: 19.9373, address: "Rynek Główny, 31-042 Kraków" },
   season: { start: "2026-11-28", end: "2026-12-26" },
   openingHours: [{ days: [1, 2, 3, 4, 5, 6, 7], open: "10:00", close: "22:00" }],
+  hoursExceptions: [
+    { date: "2026-12-24", open: "10:00", close: "14:00" },
+    { date: "2026-12-25", closed: true },
+  ],
   hoursNote: {
     en: "TEST: 24 Dec until 14:00, closed 25 Dec.",
     pl: "TEST: 24.12 do 14:00, 25.12 nieczynne.",

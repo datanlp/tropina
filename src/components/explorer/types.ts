@@ -1,3 +1,5 @@
+import type { Schedule } from "@/lib/schedule";
+
 /** What the client map and list need about a market: small and already localized. */
 export type MarketPin = {
   id: string;
@@ -9,4 +11,5 @@ export type MarketPin = {
   lng: number;
   dates: string;
   verified: boolean;
+  schedule: Schedule;
 };

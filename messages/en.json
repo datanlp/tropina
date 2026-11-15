@@ -69,5 +69,18 @@
     "CooperativeGesturesHandler.WindowsHelpText": "Use Ctrl + scroll to zoom the map",
     "CooperativeGesturesHandler.MacHelpText": "Use ⌘ + scroll to zoom the map",
     "CooperativeGesturesHandler.MobileHelpText": "Use two fingers to move the map"
+  },
+  "Filters": {
+    "legend": "Show",
+    "openNow": "Open now",
+    "weekend": "This weekend",
+    "all": "All",
+    "noResults": "No markets match this filter right now."
+  },
+  "SeasonStatus": {
+    "openNow": "Open now",
+    "closedNow": "Closed right now",
+    "upcoming": "The season has not started yet",
+    "over": "This season is over. See you next year!"
   }
 }

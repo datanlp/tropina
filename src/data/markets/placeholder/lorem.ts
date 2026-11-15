@@ -120,6 +120,10 @@ export const loremMarkets: Market[] = rows.map((r) => ({
     { days: [1, 2, 3, 4, 5], open: "11:00", close: "20:00" },
     { days: [6, 7], open: "10:00", close: "21:00" },
   ],
+  hoursExceptions: [
+    { date: "2026-12-24", open: "10:00", close: "14:00" },
+    { date: "2026-12-25", closed: true },
+  ],
   hoursNote: same("Lorem ipsum: 24.12 — 14:00."),
   food: [{ name: same("Lorem ipsum"), note: same(LOREM) }, { name: same("Dolor sit amet") }],
   description: same(LOREM),

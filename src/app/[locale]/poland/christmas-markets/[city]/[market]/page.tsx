@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getFormatter, getLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { SeasonDates } from "@/components/SeasonDates";
+import { SeasonStatus } from "@/components/SeasonStatus";
 import { VerificationBadge } from "@/components/VerificationBadge";
 import { findMarket, markets } from "@/data/markets";
 import { Link } from "@/i18n/navigation";
@@ -51,6 +52,14 @@ export default async function MarketPage({ params }: Props) {
       </p>
       <h1>{m.name[locale]}</h1>
       <p className="lead">{m.description[locale]}</p>
+
+      <SeasonStatus
+        schedule={{
+          season: m.season,
+          openingHours: m.openingHours,
+          hoursExceptions: m.hoursExceptions,
+        }}
+      />
 
       <h2>{t("dates")}</h2>
       <p>
