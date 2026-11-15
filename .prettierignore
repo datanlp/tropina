@@ -6,3 +6,5 @@ playwright-report
 next-env.d.ts
 docs/tropina-start-prompt.md
 docs/context.md
+public/vendor
+screenshots

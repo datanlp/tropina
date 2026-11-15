@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "cross-env TROPINA_INCLUDE_TEST_DATA=1 TROPINA_INCLUDE_PLACEHOLDER_DATA=1 next dev",
     "preview": "cross-env TROPINA_INCLUDE_PLACEHOLDER_DATA=1 npm run build && next start",
-    "prebuild": "tsx scripts/validate-data.ts",
+    "prebuild": "node scripts/copy-maplibre-worker.mjs && tsx scripts/validate-data.ts",
     "build": "next build",
     "build:e2e": "cross-env TROPINA_INCLUDE_TEST_DATA=1 npm run build",
     "start": "next start",
@@ -16,9 +16,11 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "e2e": "playwright test --trace off",
-    "validate:data": "tsx scripts/validate-data.ts"
+    "validate:data": "tsx scripts/validate-data.ts",
+    "predev": "node scripts/copy-maplibre-worker.mjs"
   },
   "dependencies": {
+    "maplibre-gl": "^6.18.0",
     "next": "16.4.6",
     "next-intl": "^4.15.1",
     "react": "19.3.0",
@@ -39,7 +41,8 @@
     "prettier": "^3.10.1",
     "tsx": "^4.23.15",
     "typescript": "^5",
-    "vitest": "^5.1.0"
+    "vitest": "^5.1.0",
+    "wait-on": "^9.5.1"
   },
   "engines": {
     "node": "^22.12.0 || >=24.0.0"

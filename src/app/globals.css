@@ -71,8 +71,11 @@ a {
   z-index: 10;
 }
 
+/* When focused it takes its own row above the header instead of covering it. */
 .skip-link:focus {
-  top: var(--space);
+  position: static;
+  display: inline-block;
+  margin: 0.5rem var(--space) 0;
 }
 
 .site-header {
@@ -203,5 +206,132 @@ h1 {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Map + list (stage 2) ---------- */
+
+.explorer {
+  display: grid;
+  gap: var(--space);
+}
+
+.explorer__switch {
+  display: none;
+  gap: 0.5rem;
+}
+
+.explorer__switch button,
+.market-list__select {
+  min-height: 44px;
+  padding: 0 1rem;
+  border: 2px solid var(--color-text);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.explorer__switch button[aria-pressed="true"],
+.market-list__select[aria-pressed="true"] {
+  background: var(--color-text);
+  color: var(--color-bg);
+  font-weight: 700;
+}
+
+.market-list__select {
+  margin-top: 0.5rem;
+  min-height: 36px;
+  font-size: 0.95rem;
+}
+
+.market-list__item[data-selected] {
+  border: 3px solid var(--color-text);
+}
+
+.market-list__selected {
+  margin-left: 0.5rem;
+  font-weight: 700;
+}
+
+.explorer__map {
+  position: relative;
+  min-height: 420px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.explorer__canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.explorer__map-error {
+  position: absolute;
+  inset: auto 0 0 0;
+  margin: 0;
+  padding: 0.75rem 1rem;
+  background: var(--color-warn-bg);
+  color: var(--color-warn-text);
+}
+
+.maplibregl-popup-content a {
+  color: var(--color-accent);
+}
+
+.maplibregl-popup-content {
+  color: #1b1b1f;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.button--secondary {
+  background: var(--color-bg);
+  color: var(--color-accent);
+  border: 2px solid var(--color-accent);
+}
+
+@media (min-width: 900px) {
+  main:has(.explorer) {
+    max-width: 80rem;
+  }
+
+  .explorer {
+    grid-template-columns: minmax(20rem, 2fr) 3fr;
+    align-items: start;
+  }
+
+  .explorer__list {
+    max-height: 75vh;
+    overflow-y: auto;
+    margin: 0;
+    padding-right: 0.25rem;
+  }
+
+  .explorer__map {
+    position: sticky;
+    top: var(--space);
+    height: 75vh;
+  }
+}
+
+@media (max-width: 899px) {
+  .explorer__switch {
+    display: flex;
+  }
+
+  .explorer[data-view="list"] .explorer__map,
+  .explorer[data-view="map"] .explorer__list {
+    display: none;
+  }
+
+  .explorer__map {
+    height: 70vh;
   }
 }

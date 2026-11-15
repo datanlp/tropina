@@ -10,7 +10,12 @@
   },
   "LocaleSwitcher": {
     "label": "Язык",
-    "names": { "en": "English", "pl": "Polski", "ru": "Русский", "uk": "Українська" }
+    "names": {
+      "en": "English",
+      "pl": "Polski",
+      "ru": "Русский",
+      "uk": "Українська"
+    }
   },
   "MarketsPage": {
     "title": "Рождественские ярмарки Польши",
@@ -29,7 +34,10 @@
     "officialSite": "Официальный сайт",
     "lastChecked": "Даты проверены {date}",
     "suggestedBy": "Посоветовал(а) {nick}",
-    "back": "Все ярмарки: {city}"
+    "back": "Все ярмарки: {city}",
+    "directions": "Как добраться",
+    "transport": "Транспорт",
+    "accessibility": "Доступность"
   },
   "MarketStatus": {
     "unverified": "Даты ещё не подтверждены организатором",
@@ -39,5 +47,27 @@
     "title": "Страница не найдена",
     "text": "Такой страницы нет или она переехала.",
     "home": "К рождественским ярмаркам Польши"
+  },
+  "Explorer": {
+    "mapLabel": "Карта рождественских ярмарок",
+    "listLabel": "Рождественские ярмарки",
+    "viewSwitch": "Показать как",
+    "viewMap": "Карта",
+    "viewList": "Список",
+    "showOnMap": "Показать на карте",
+    "selected": "Выбрано",
+    "openCard": "Открыть страницу ярмарки",
+    "mapUnavailable": "Карту не удалось загрузить. Все ярмарки есть в списке."
+  },
+  "MapUi": {
+    "Map.Title": "Карта",
+    "NavigationControl.ZoomIn": "Приблизить",
+    "NavigationControl.ZoomOut": "Отдалить",
+    "NavigationControl.ResetBearing": "Повернуть на север",
+    "AttributionControl.ToggleAttribution": "Показать источники карты",
+    "Popup.Close": "Закрыть",
+    "CooperativeGesturesHandler.WindowsHelpText": "Чтобы приблизить карту, используйте Ctrl + колесо",
+    "CooperativeGesturesHandler.MacHelpText": "Чтобы приблизить карту, используйте ⌘ + колесо",
+    "CooperativeGesturesHandler.MobileHelpText": "Двигайте карту двумя пальцами"
   }
 }
