@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import { MarketList } from "@/components/MarketList";
 import { findCity, getCities } from "@/data/markets";
 import { Link } from "@/i18n/navigation";
-import { MARKETS_PATH } from "@/lib/paths";
+import { MARKETS_PATH, cityPath } from "@/lib/paths";
+import { alternatesFor } from "@/lib/seo";
 import { staticParamsOrPlaceholder } from "@/lib/static-params";
 
 export function generateStaticParams() {
@@ -20,7 +21,10 @@ export async function generateMetadata({
   const city = findCity((await params).city);
   if (!city) return {};
   const [t, locale] = await Promise.all([getTranslations("CityPage"), getLocale()]);
-  return { title: t("title", { city: city.name[locale] }) };
+  return {
+    title: t("title", { city: city.name[locale] }),
+    alternates: alternatesFor(cityPath(city.slug), locale),
+  };
 }
 
 export default async function CityPage({

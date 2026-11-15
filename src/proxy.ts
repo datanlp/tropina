@@ -2,7 +2,7 @@ import createMiddleware from "next-intl/middleware";
 import { type NextRequest, NextResponse } from "next/server";
 import { markets } from "./data/markets";
 import { routing } from "./i18n/routing";
-import { isUnknownMarketPath } from "./lib/known-paths";
+import { isUnknownMarketPath, singleMarketRedirect } from "./lib/known-paths";
 
 // Next 16 renamed `middleware.ts` to `proxy.ts`. next-intl adds the language
 // prefix: `/` → `/{lang}` from Accept-Language (default `en`), no cookie.
@@ -15,6 +15,11 @@ export default function proxy(request: NextRequest) {
     // streaming, so the response is a real 404 with the localized page.
     const locale = pathname.split("/")[1];
     return NextResponse.rewrite(new URL(`/${locale}/not-found`, request.url));
+  }
+  const only = singleMarketRedirect(pathname, markets);
+  if (only) {
+    // Temporary (307): when a second market is added, the city page comes back.
+    return NextResponse.redirect(new URL(only, request.url));
   }
   return handleI18n(request);
 }

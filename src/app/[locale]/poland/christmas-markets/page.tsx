@@ -4,11 +4,16 @@ import { MarketsExplorer } from "@/components/explorer/MarketsExplorer";
 import type { MarketPin } from "@/components/explorer/types";
 import { markets } from "@/data/markets";
 import { calendarDate } from "@/lib/dates";
-import { marketPath } from "@/lib/paths";
+import { MARKETS_PATH, marketPath } from "@/lib/paths";
+import { alternatesFor } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("Metadata");
-  return { title: { absolute: `${t("marketsTitle")} · ${t("siteName")}` } };
+  const [t, locale] = await Promise.all([getTranslations("Metadata"), getLocale()]);
+  return {
+    title: { absolute: `${t("marketsTitle")} · ${t("siteName")}` },
+    description: t("marketsDescription"),
+    alternates: alternatesFor(MARKETS_PATH, locale),
+  };
 }
 
 export default async function MarketsPage() {

@@ -22,11 +22,13 @@ for (const lang of langs) {
       );
     });
 
-    test("city page opens and lists its markets", async ({ page }) => {
+    // Stage 4: a city with a single market redirects to it (start prompt, stage 4).
+    // Both TEST cities have one market, so the city URL lands on the market page.
+    test("city URL opens its only market", async ({ page }) => {
       const res = await page.goto(`/${lang}${CITY}`);
       expect(res?.status()).toBe(200);
+      await expect(page).toHaveURL(`/${lang}${MARKET}`);
       await expect(page.locator("html")).toHaveAttribute("lang", lang);
-      await expect(page.getByRole("link", { name: /^TEST/ })).toHaveCount(1);
     });
 
     test("market page opens with an official link", async ({ page }) => {
