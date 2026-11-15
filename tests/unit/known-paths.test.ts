@@ -7,8 +7,12 @@ describe("isUnknownMarketPath", () => {
   it("accepts the list, known cities and known markets", () => {
     expect(isUnknownMarketPath("/en/poland/christmas-markets", markets)).toBe(false);
     expect(isUnknownMarketPath("/pl/poland/christmas-markets/krakow", markets)).toBe(false);
-    expect(isUnknownMarketPath("/uk/poland/christmas-markets/krakow/rynek-glowny", markets)).toBe(false);
-    expect(isUnknownMarketPath("/uk/poland/christmas-markets/krakow/rynek-glowny/", markets)).toBe(false);
+    expect(isUnknownMarketPath("/uk/poland/christmas-markets/krakow/rynek-glowny", markets)).toBe(
+      false,
+    );
+    expect(isUnknownMarketPath("/uk/poland/christmas-markets/krakow/rynek-glowny/", markets)).toBe(
+      false,
+    );
   });
 
   it("flags unknown cities and markets", () => {

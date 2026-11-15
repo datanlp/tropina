@@ -21,13 +21,10 @@ describe("market schema", () => {
     },
   );
 
-  it.each(["en", "pl", "ru", "uk"] as const)(
-    "rejects an empty %s translation",
-    (lang) => {
-      const m = validMarket();
-      expect(parse({ ...m, description: { ...m.description, [lang]: "  " } }).success).toBe(false);
-    },
-  );
+  it.each(["en", "pl", "ru", "uk"] as const)("rejects an empty %s translation", (lang) => {
+    const m = validMarket();
+    expect(parse({ ...m, description: { ...m.description, [lang]: "  " } }).success).toBe(false);
+  });
 
   it("rejects a missing translation inside nested fields (food, city)", () => {
     const m = validMarket();
@@ -67,7 +64,9 @@ describe("market schema", () => {
   it("rejects slugs with diacritics, capitals or spaces", () => {
     const m = validMarket();
     expect(parse({ ...m, slug: "rynek-główny", id: "krakow-rynek-główny" }).success).toBe(false);
-    expect(parse({ ...m, city: { ...m.city, slug: "Krakow" }, id: "Krakow-rynek-glowny" }).success).toBe(false);
+    expect(
+      parse({ ...m, city: { ...m.city, slug: "Krakow" }, id: "Krakow-rynek-glowny" }).success,
+    ).toBe(false);
   });
 
   it("requires id to be {city}-{market}", () => {
@@ -76,9 +75,15 @@ describe("market schema", () => {
 
   it("rejects malformed opening hours", () => {
     const m = validMarket();
-    expect(parse({ ...m, openingHours: [{ days: [0], open: "10:00", close: "21:00" }] }).success).toBe(false);
-    expect(parse({ ...m, openingHours: [{ days: [1], open: "25:00", close: "21:00" }] }).success).toBe(false);
-    expect(parse({ ...m, openingHours: [{ days: [], open: "10:00", close: "21:00" }] }).success).toBe(false);
+    expect(
+      parse({ ...m, openingHours: [{ days: [0], open: "10:00", close: "21:00" }] }).success,
+    ).toBe(false);
+    expect(
+      parse({ ...m, openingHours: [{ days: [1], open: "25:00", close: "21:00" }] }).success,
+    ).toBe(false);
+    expect(
+      parse({ ...m, openingHours: [{ days: [], open: "10:00", close: "21:00" }] }).success,
+    ).toBe(false);
   });
 
   it("rejects duplicate market ids in a list", () => {

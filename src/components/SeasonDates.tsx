@@ -5,6 +5,10 @@ import { calendarDate } from "@/lib/dates";
 export function SeasonDates({ season }: { season: Market["season"] }) {
   const format = useFormatter();
   return (
-    <>{format.dateTimeRange(calendarDate(season.start), calendarDate(season.end), { dateStyle: "long" })}</>
+    <>
+      {format.dateTimeRange(calendarDate(season.start), calendarDate(season.end), {
+        dateStyle: "long",
+      })}
+    </>
   );
 }

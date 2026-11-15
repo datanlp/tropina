@@ -17,7 +17,13 @@ describe("date helpers", () => {
 
   it("groups consecutive weekdays into ranges", () => {
     expect(weekdayRanges([1, 2, 3, 4, 5, 6, 7])).toEqual([[1, 7]]);
-    expect(weekdayRanges([6, 7, 1])).toEqual([[1, 1], [6, 7]]);
-    expect(weekdayRanges([1, 2, 3, 5])).toEqual([[1, 3], [5, 5]]);
+    expect(weekdayRanges([6, 7, 1])).toEqual([
+      [1, 1],
+      [6, 7],
+    ]);
+    expect(weekdayRanges([1, 2, 3, 5])).toEqual([
+      [1, 3],
+      [5, 5],
+    ]);
   });
 });
