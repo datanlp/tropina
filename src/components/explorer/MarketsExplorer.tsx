@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import { track } from "@/lib/analytics";
 import { type MarketFilter, matchesFilter } from "@/lib/schedule";
@@ -21,6 +21,8 @@ export function MarketsExplorer({ pins }: { pins: MarketPin[] }) {
   const [filter, setFilter] = useState<MarketFilter>("all");
   const tf = useTranslations("Filters");
   const now = useNow();
+  const mapBox = useRef<HTMLElement>(null);
+  const loadMap = useMapWhenVisible(mapBox);
 
   // Until the client knows the time, show everything (static HTML).
   const shown = now ? pins.filter((p) => matchesFilter(p.schedule, filter, now)) : pins;
@@ -101,21 +103,56 @@ export function MarketsExplorer({ pins }: { pins: MarketPin[] }) {
         aria-label={t("mapLabel")}
         data-testid="market-map"
         data-selected={selected ?? ""}
+        ref={mapBox}
       >
-        <MarketMap
-          pins={shown}
-          selected={selected}
-          visible={view === "map"}
-          onSelect={(id) => {
-            setSelected(id);
-            document
-              .getElementById(`market-${id}`)
-              ?.scrollIntoView({ block: "nearest", behavior: "smooth" });
-          }}
-        />
+        {loadMap && (
+          <MarketMap
+            pins={shown}
+            selected={selected}
+            visible={view === "map"}
+            onSelect={(id) => {
+              setSelected(id);
+              document
+                .getElementById(`market-${id}`)
+                ?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+            }}
+          />
+        )}
       </section>
     </div>
   );
+}
+
+/**
+ * MapLibre is the heaviest script on the site. It is downloaded only once the
+ * map box is actually on screen (on phones the list is shown first), and then
+ * only when the browser is idle, so the list becomes usable sooner.
+ */
+function useMapWhenVisible(box: React.RefObject<HTMLElement | null>): boolean {
+  const [load, setLoad] = useState(false);
+  useEffect(() => {
+    const el = box.current;
+    if (!el || load) return;
+    // Safari has no requestIdleCallback.
+    const w = window as Omit<Window, "requestIdleCallback" | "cancelIdleCallback"> &
+      Partial<Pick<Window, "requestIdleCallback" | "cancelIdleCallback">>;
+    let idle = 0;
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((e) => e.isIntersecting)) return;
+      observer.disconnect();
+      const start = () => setLoad(true);
+      idle = w.requestIdleCallback
+        ? w.requestIdleCallback(start, { timeout: 1500 })
+        : w.setTimeout(start, 200);
+    });
+    observer.observe(el);
+    return () => {
+      observer.disconnect();
+      if (w.cancelIdleCallback) w.cancelIdleCallback(idle);
+      else w.clearTimeout(idle);
+    };
+  }, [box, load]);
+  return load;
 }
 
 function UnverifiedNote() {

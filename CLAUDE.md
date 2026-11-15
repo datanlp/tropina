@@ -54,7 +54,8 @@ the owner, this file wins.
 - LOREM placeholders for the eight launch cities live in `src/data/markets/placeholder/`
   (owner's request, 2026-11-15) and are included only with
   `TROPINA_INCLUDE_PLACEHOLDER_DATA=1` (`npm run dev`, `npm run preview`). Not in e2e or
-  production. Delete the folder when the real cards arrive.
+  production. Delete the folder when the real cards arrive. Real cards come in the format of
+  `docs/market-card-template.md`.
 - `verified: false` dates are always shown with an explicit note.
 
 ## Accessibility (WCAG 2.2 AA from day one)
@@ -72,6 +73,8 @@ the owner, this file wins.
   stop and ask the owner.
 - Before saying "done", run all of: `npm run typecheck`, `npm run lint`,
   `npm run format:check`, `npm test`, `npm run e2e`, `npm run build`.
+- Lighthouse gate (stage 6): `npm run lighthouse` against a running app, performance and
+  accessibility ≥ 90 on a phone profile; runs in the CI preview job.
 - E2E: desktop and mobile (Pixel 7) projects. Set `PW_CHROMIUM_PATH` to use a
   preinstalled Chromium instead of `npx playwright install chromium`.
 
