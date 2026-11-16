@@ -57,7 +57,14 @@
     "showOnMap": "Pokaż na mapie",
     "selected": "Wybrany",
     "openCard": "Otwórz stronę jarmarku",
-    "mapUnavailable": "Nie udało się wczytać mapy. Wszystkie jarmarki są na liście."
+    "mapUnavailable": "Nie udało się wczytać mapy. Wszystkie jarmarki są na liście.",
+    "christmasMarket": "Jarmark bożonarodzeniowy",
+    "until": "do {date}",
+    "explore": "Zobacz",
+    "closeCard": "Zamknij",
+    "sendPhoto": "Wyślij swoje zdjęcie",
+    "aiPhoto": "Obraz wygenerowany przez AI",
+    "photoBy": "Zdjęcie: {name}"
   },
   "MapUi": {
     "Map.Title": "Mapa",

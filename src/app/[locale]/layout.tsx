@@ -34,7 +34,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export const viewport: Viewport = { themeColor: "#14392b" };
+export const viewport: Viewport = { themeColor: "#1f4a36" };
 
 // Umami Cloud (cookie-free). Without a website id analytics stays off.
 const umamiWebsiteId = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID;

@@ -9,7 +9,8 @@ export type AnalyticsEvent =
   | "filter_change"
   | "install_prompt_shown"
   | "app_installed"
-  | "lang_change";
+  | "lang_change"
+  | "photo_form_click";
 
 export type AnalyticsProps = Record<string, string | number | boolean>;
 
