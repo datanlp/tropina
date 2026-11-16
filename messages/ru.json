@@ -64,7 +64,8 @@
     "closeCard": "Закрыть",
     "sendPhoto": "Прислать своё фото",
     "aiPhoto": "Сгенерировано ИИ",
-    "photoBy": "Фото: {name}"
+    "photoBy": "Фото: {name}",
+    "favorite": "Добавить «{name}» в избранное"
   },
   "MapUi": {
     "Map.Title": "Карта",

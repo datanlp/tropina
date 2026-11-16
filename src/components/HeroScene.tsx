@@ -81,24 +81,27 @@ function garland(x1: number, x2: number, y: number, sag: number, n: number) {
 
 const STALLS = [40, 210, 820, 990];
 
-export function HeroScene() {
+/** `id` keeps the SVG pattern/filter ids unique when the scene is used many times. */
+export function HeroScene({ id = "hs", className }: { id?: string; className?: string }) {
+  const stripes = `${id}-stripes`;
+  const glow = `${id}-glow`;
   const loops = [garland(-20, 300, 70, 26, 9), garland(300, 620, 70, 30, 9)];
   const loops2 = [garland(580, 900, 70, 30, 9), garland(900, 1220, 70, 26, 9)];
 
   return (
     <svg
-      className="hero-scene"
+      className={className ? `hero-scene ${className}` : "hero-scene"}
       viewBox={`0 0 ${W} ${H}`}
       preserveAspectRatio="xMidYMax slice"
       aria-hidden="true"
       focusable="false"
     >
       <defs>
-        <pattern id="hs-stripes" width="28" height="10" patternUnits="userSpaceOnUse">
+        <pattern id={stripes} width="28" height="10" patternUnits="userSpaceOnUse">
           <rect className="hs-stripe-a" width="14" height="10" />
           <rect className="hs-stripe-b" x="14" width="14" height="10" />
         </pattern>
-        <filter id="hs-glow" x="-100%" y="-100%" width="300%" height="300%">
+        <filter id={glow} x="-100%" y="-100%" width="300%" height="300%">
           <feGaussianBlur stdDeviation="3" />
         </filter>
       </defs>
@@ -144,7 +147,7 @@ export function HeroScene() {
           <rect className="hs-stall-counter" x={x + 8} y={290} width={124} height={8} />
           <polygon
             points={`${x},262 ${x + 20},230 ${x + 120},230 ${x + 140},262`}
-            fill="url(#hs-stripes)"
+            fill={`url(#${stripes})`}
           />
           <path className="hs-snow" d={`M${x + 20} 230 H${x + 120}`} />
         </g>
@@ -156,7 +159,7 @@ export function HeroScene() {
           <path className="hs-wire" d={g.d} />
           {g.pts.map(([px, py], k) => (
             <g key={k} className={`hs-bulb hs-bulb--${((k + li) % 4) + 1}`}>
-              <circle className="hs-halo" cx={px} cy={py + 6} r={9} filter="url(#hs-glow)" />
+              <circle className="hs-halo" cx={px} cy={py + 6} r={9} filter={`url(#${glow})`} />
               <circle cx={px} cy={py + 6} r={4.5} />
             </g>
           ))}

@@ -1,10 +1,13 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@/i18n/navigation";
+import { HeroScene } from "@/components/HeroScene";
 import { track } from "@/lib/analytics";
+import { useFavorites } from "@/lib/favorites";
 import { type MarketFilter, matchesFilter } from "@/lib/schedule";
 import { useNow } from "@/lib/use-now";
 import { MarketSheet } from "./MarketSheet";
@@ -28,6 +31,7 @@ export function MarketsExplorer({ pins }: { pins: MarketPin[] }) {
   const now = useNow();
   const mapBox = useRef<HTMLElement>(null);
   const loadMap = useMapWhenVisible(mapBox);
+  const [favorites, toggleFavorite] = useFavorites();
 
   // Until the client knows the time, show everything (static HTML).
   const shown = now ? pins.filter((p) => matchesFilter(p.schedule, filter, now)) : pins;
@@ -44,7 +48,9 @@ export function MarketsExplorer({ pins }: { pins: MarketPin[] }) {
         <legend>{tf("legend")}</legend>
         {filters.map(([value, label]) => (
           <label key={value}>
+            <FilterIcon filter={value} />
             <input
+              className="filters__radio"
               type="radio"
               name="market-filter"
               value={value}
@@ -113,16 +119,35 @@ export function MarketsExplorer({ pins }: { pins: MarketPin[] }) {
               className="market-list__item"
               data-selected={isSelected || undefined}
             >
-              <div className="market-list__stamp" aria-hidden="true">
-                <span className="market-list__day">{p.startDay}</span>
-                <span className="market-list__month">{p.startMonth}</span>
+              <div className="market-list__thumb">
+                {p.photo ? (
+                  <Image
+                    src={p.photo.src}
+                    alt={p.photo.alt}
+                    fill
+                    sizes="(max-width: 899px) 30vw, 10rem"
+                    className="market-list__photo"
+                  />
+                ) : (
+                  <HeroScene id={`thumb-${p.id}`} />
+                )}
+                <div className="market-list__stamp" aria-hidden="true">
+                  <span className="market-list__day">{p.startDay}</span>
+                  <span className="market-list__month">{p.startMonth}</span>
+                </div>
+                {p.photo?.source === "ai" && (
+                  <span className="market-list__ai">{t("aiPhoto")}</span>
+                )}
               </div>
               <div className="market-list__body">
                 <p className="market-list__city">{p.city}</p>
                 <h2 className="market-list__name">
                   <Link href={p.href}>{p.name}</Link>
                 </h2>
-                <p className="market-list__dates">{p.dates}</p>
+                <p className="market-list__dates">
+                  <CalendarIcon />
+                  {p.dates}
+                </p>
                 {!p.verified && <UnverifiedNote />}
                 <button
                   type="button"
@@ -135,6 +160,15 @@ export function MarketsExplorer({ pins }: { pins: MarketPin[] }) {
                 </button>
                 {isSelected && <span className="market-list__selected">{t("selected")}</span>}
               </div>
+              <button
+                type="button"
+                className="market-list__fav"
+                aria-pressed={favorites.includes(p.id)}
+                aria-label={t("favorite", { name: p.name })}
+                onClick={() => toggleFavorite(p.id)}
+              >
+                <StarIcon />
+              </button>
             </li>
           );
         })}
@@ -205,6 +239,36 @@ export function PinIcon() {
   return (
     <svg className="icon" viewBox="0 0 24 24" aria-hidden="true">
       <path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z" />
+    </svg>
+  );
+}
+
+function CalendarIcon() {
+  return (
+    <svg className="icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M7 2h2v2h6V2h2v2h3v18H4V4h3zm11 8H6v10h12zM6 6v2h12V6z" />
+    </svg>
+  );
+}
+
+function StarIcon() {
+  return (
+    <svg className="icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="m12 2.8 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.6l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9z" />
+    </svg>
+  );
+}
+
+function FilterIcon({ filter }: { filter: MarketFilter }) {
+  return (
+    <svg className="icon" viewBox="0 0 24 24" aria-hidden="true">
+      {filter === "all" ? (
+        <path d="M12 2 7 9h3l-4 6h4l-5 6h14l-5-6h4l-4-6h3z" />
+      ) : filter === "weekend" ? (
+        <path d="M7 2h2v2h6V2h2v2h3v18H4V4h3zm11 8H6v10h12zM6 6v2h12V6zm2 6h3v3H8z" />
+      ) : (
+        <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm1-13h-2v6l5 3 1-1.6-4-2.4z" />
+      )}
     </svg>
   );
 }

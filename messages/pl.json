@@ -64,7 +64,8 @@
     "closeCard": "Zamknij",
     "sendPhoto": "Wyślij swoje zdjęcie",
     "aiPhoto": "Obraz wygenerowany przez AI",
-    "photoBy": "Zdjęcie: {name}"
+    "photoBy": "Zdjęcie: {name}",
+    "favorite": "Dodaj {name} do ulubionych"
   },
   "MapUi": {
     "Map.Title": "Mapa",

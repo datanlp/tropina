@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { getFormatter, getLocale, getTranslations } from "next-intl/server";
+import Image from "next/image";
+import { HeroScene } from "@/components/HeroScene";
+import { HERO_IMAGE } from "@/lib/links";
 import { MarketsExplorer } from "@/components/explorer/MarketsExplorer";
 import type { MarketPin } from "@/components/explorer/types";
 import { markets } from "@/data/markets";
@@ -53,6 +56,20 @@ export default async function MarketsPage() {
 
   return (
     <>
+      <div className="hero-backdrop" aria-hidden="true">
+        {HERO_IMAGE ? (
+          <Image
+            src={HERO_IMAGE}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="hero-backdrop__img"
+          />
+        ) : (
+          <HeroScene id="hero" />
+        )}
+      </div>
       <div className="page-intro">
         <h1>{t("title")}</h1>
         <p className="lead">{t("intro")}</p>
