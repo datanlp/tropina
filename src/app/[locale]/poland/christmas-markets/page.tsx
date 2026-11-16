@@ -43,8 +43,10 @@ export default async function MarketsPage() {
 
   return (
     <>
-      <h1>{t("title")}</h1>
-      <p className="lead">{t("intro")}</p>
+      <div className="hero">
+        <h1>{t("title")}</h1>
+        <p className="lead">{t("intro")}</p>
+      </div>
       {pins.length > 0 ? <MarketsExplorer pins={pins} /> : <p>{t("empty")}</p>}
     </>
   );

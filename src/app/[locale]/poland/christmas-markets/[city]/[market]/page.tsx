@@ -62,7 +62,7 @@ export default async function MarketPage({ params }: Props) {
       .join(", ");
 
   return (
-    <article>
+    <article className="market-page">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLdScript(marketEventJsonLd(m, locale)) }}

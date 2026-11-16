@@ -17,11 +17,11 @@ export function MarketList({
     <ul className="market-list">
       {markets.map((m) => (
         <li key={m.id} className="market-list__item">
+          {showCity && <p className="market-list__city">{m.city.name[locale]}</p>}
           <h2 className="market-list__name">
             <Link href={marketPath(m)}>{m.name[locale]}</Link>
           </h2>
-          <p>
-            {showCity && <>{m.city.name[locale]} · </>}
+          <p className="market-list__dates">
             <SeasonDates season={m.season} />
           </p>
           {!m.verified && <VerificationBadge verified={false} />}

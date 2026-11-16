@@ -77,12 +77,11 @@ export function MarketsExplorer({ pins }: { pins: MarketPin[] }) {
               className="market-list__item"
               data-selected={isSelected || undefined}
             >
+              <p className="market-list__city">{p.city}</p>
               <h2 className="market-list__name">
                 <Link href={p.href}>{p.name}</Link>
               </h2>
-              <p>
-                {p.city} · {p.dates}
-              </p>
+              <p className="market-list__dates">{p.dates}</p>
               {!p.verified && <UnverifiedNote />}
               <button
                 type="button"
@@ -90,6 +89,7 @@ export function MarketsExplorer({ pins }: { pins: MarketPin[] }) {
                 aria-pressed={isSelected}
                 onClick={() => setSelected(p.id)}
               >
+                <PinIcon />
                 {t("showOnMap")}
               </button>
               {isSelected && <span className="market-list__selected">{t("selected")}</span>}
@@ -153,6 +153,14 @@ function useMapWhenVisible(box: React.RefObject<HTMLElement | null>): boolean {
     };
   }, [box, load]);
   return load;
+}
+
+function PinIcon() {
+  return (
+    <svg className="icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z" />
+    </svg>
+  );
 }
 
 function UnverifiedNote() {
