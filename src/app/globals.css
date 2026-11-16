@@ -1208,3 +1208,24 @@ h2 {
     min-height: 44px;
   }
 }
+
+/* ---------- Light map preview until MapLibre loads ---------- */
+
+.map-preview {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60% 50% at 30% 40%, #e3e8d3 0, transparent 70%),
+    radial-gradient(40% 30% at 70% 70%, #e6dfcf 0, transparent 70%), #f1ebdf;
+}
+
+.map-preview__pin {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border: 3px solid #fffaf1;
+  border-radius: 50% 50% 50% 0;
+  background: #8b1e2d;
+  box-shadow: 0 3px 8px rgb(60 10 20 / 30%);
+  transform: translate(-50%, -100%) rotate(-45deg);
+}

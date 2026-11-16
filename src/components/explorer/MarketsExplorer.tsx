@@ -86,6 +86,7 @@ export function MarketsExplorer({ pins }: { pins: MarketPin[] }) {
         data-selected={selected ?? ""}
         ref={mapBox}
       >
+        {!loadMap && <MapPreview pins={shown} />}
         {loadMap && (
           <MarketMap
             pins={shown}
@@ -144,34 +145,60 @@ export function MarketsExplorer({ pins }: { pins: MarketPin[] }) {
 
 /**
  * MapLibre is the heaviest script on the site. It is downloaded only once the
- * map box is actually on screen, and then only when the browser is idle, so
- * the list becomes usable sooner.
+ * map box is on screen and the visitor has done something (touch, scroll,
+ * mouse, key), so the first paint and the list stay fast on slow phones.
+ * Until then a light preview with the pins stands in for the map.
  */
 function useMapWhenVisible(box: React.RefObject<HTMLElement | null>): boolean {
   const [load, setLoad] = useState(false);
   useEffect(() => {
     const el = box.current;
     if (!el || load) return;
-    // Safari has no requestIdleCallback.
-    const w = window as Omit<Window, "requestIdleCallback" | "cancelIdleCallback"> &
-      Partial<Pick<Window, "requestIdleCallback" | "cancelIdleCallback">>;
-    let idle = 0;
+    let visible = false;
+    let touched = false;
+    const events = ["pointerdown", "pointermove", "keydown", "scroll", "wheel", "touchstart"];
+    const maybeStart = () => {
+      if (visible && touched) setLoad(true);
+    };
+    const onActivity = () => {
+      touched = true;
+      for (const e of events) window.removeEventListener(e, onActivity);
+      maybeStart();
+    };
+    for (const e of events) window.addEventListener(e, onActivity, { passive: true });
     const observer = new IntersectionObserver((entries) => {
-      if (!entries.some((e) => e.isIntersecting)) return;
-      observer.disconnect();
-      const start = () => setLoad(true);
-      idle = w.requestIdleCallback
-        ? w.requestIdleCallback(start, { timeout: 1500 })
-        : w.setTimeout(start, 200);
+      visible = entries.some((e) => e.isIntersecting);
+      maybeStart();
     });
     observer.observe(el);
     return () => {
       observer.disconnect();
-      if (w.cancelIdleCallback) w.cancelIdleCallback(idle);
-      else w.clearTimeout(idle);
+      for (const e of events) window.removeEventListener(e, onActivity);
     };
   }, [box, load]);
   return load;
+}
+
+/** Pins placed roughly on a plain background while MapLibre is not loaded. */
+function MapPreview({ pins }: { pins: MarketPin[] }) {
+  const [[west, south], [east, north]] = [
+    [14.07, 49.0],
+    [24.15, 54.9],
+  ];
+  return (
+    <div className="map-preview" aria-hidden="true">
+      {pins.map((p) => (
+        <span
+          key={p.id}
+          className="map-preview__pin"
+          style={{
+            left: `${6 + ((p.lng - west) / (east - west)) * 88}%`,
+            top: `${6 + ((north - p.lat) / (north - south)) * 88}%`,
+          }}
+        />
+      ))}
+    </div>
+  );
 }
 
 export function PinIcon() {
