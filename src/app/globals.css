@@ -1,31 +1,56 @@
+/*
+ * Tropina visual design: a map-first app in warm winter tones.
+ * Paper background, deep green for actions, burgundy for markets, serif
+ * headings (Playfair Display) and Inter for text. Text pairs are ≥ 4.5:1.
+ */
 :root {
-  --color-bg: #ffffff;
-  --color-text: #1b1b1f;
-  --color-muted: #50505a;
-  --color-accent: #a3122a;
-  --color-border: #d5d5dc;
-  --color-ok-bg: #e7f4ea;
+  --color-bg: #f6f1e8;
+  --color-surface: #fffdf9;
+  --color-text: #211c17;
+  --color-muted: #5f574d;
+  --color-border: #e6dccb;
+  --color-chip: #efe7da;
+  --color-green: #1f4a36;
+  --color-green-text: #ffffff;
+  --color-green-soft: #e3ece4;
+  --color-burgundy: #8b1e2d;
+  --color-burgundy-text: #fffaf1;
+  --color-accent: #8b1e2d;
+  --color-gold: #d9a441;
+  --color-ok-bg: #e4f2e7;
   --color-ok-text: #1d5e2c;
-  --color-warn-bg: #fff3d6;
+  --color-warn-bg: #fff1d1;
   --color-warn-text: #6b4600;
   --focus: #0b57d0;
-  --radius: 8px;
+  --shadow: 0 1px 2px rgb(40 28 10 / 6%), 0 6px 18px rgb(40 28 10 / 8%);
+  --shadow-lift: 0 2px 4px rgb(40 28 10 / 8%), 0 14px 30px rgb(40 28 10 / 16%);
+  --radius: 18px;
+  --radius-sm: 12px;
   --space: 1rem;
+  --header-h: 3.5rem;
+  --font-body: var(--font-sans), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-head: var(--font-display), Georgia, "Times New Roman", serif;
   color-scheme: light dark;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-bg: #141418;
-    --color-text: #ededf2;
-    --color-muted: #b4b4bf;
-    --color-accent: #ff8a9b;
-    --color-border: #3a3a44;
+    --color-bg: #121614;
+    --color-surface: #1b211e;
+    --color-text: #efe9df;
+    --color-muted: #b8b0a4;
+    --color-border: #2f3833;
+    --color-chip: #252d29;
+    --color-green: #2f6b4f;
+    --color-green-soft: #1f3a2d;
+    --color-accent: #ff9aa8;
     --color-ok-bg: #173a20;
     --color-ok-text: #b9eac4;
     --color-warn-bg: #3d2c05;
     --color-warn-text: #ffe1a1;
     --focus: #8ab4ff;
+    --shadow: 0 1px 2px rgb(0 0 0 / 30%);
+    --shadow-lift: 0 6px 20px rgb(0 0 0 / 45%);
   }
 }
 
@@ -41,18 +66,19 @@ body {
   margin: 0;
   background: var(--color-bg);
   color: var(--color-text);
-  font-family:
-    system-ui,
-    -apple-system,
-    "Segoe UI",
-    Roboto,
-    sans-serif;
-  line-height: 1.5;
+  font-family: var(--font-body);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
   color: var(--color-accent);
-  text-underline-offset: 0.15em;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
 }
 
 /* Focus is always visible (WCAG 2.4.7 / 2.4.11). */
@@ -61,14 +87,21 @@ a {
   outline-offset: 2px;
 }
 
+.icon {
+  width: 1.15em;
+  height: 1.15em;
+  flex: none;
+  fill: currentColor;
+}
+
 .skip-link {
   position: absolute;
   left: var(--space);
   top: -100px;
   padding: 0.5rem 1rem;
-  background: var(--color-bg);
+  background: var(--color-surface);
   color: var(--color-text);
-  z-index: 10;
+  z-index: 30;
 }
 
 /* When focused it takes its own row above the header instead of covering it. */
@@ -78,30 +111,54 @@ a {
   margin: 0.5rem var(--space) 0;
 }
 
+/* ---------- Header ---------- */
+
 .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem var(--space);
-  padding: 0.75rem var(--space);
+  min-height: var(--header-h);
+  padding: 0.25rem max(var(--space), calc((100% - 80rem) / 2));
+  background: color-mix(in srgb, var(--color-bg) 92%, transparent);
+  backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--color-border);
 }
 
 .site-header__home {
-  font-weight: 700;
-  font-size: 1.25rem;
-  color: var(--color-text);
-  text-decoration: none;
   display: inline-flex;
   align-items: center;
+  gap: 0.45rem;
   min-height: 44px;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--color-green);
+  text-decoration: none;
+}
+
+.site-header__mark {
+  width: 1.2rem;
+  height: 1.2rem;
+  fill: var(--color-burgundy);
+}
+
+@media (prefers-color-scheme: dark) {
+  .site-header__home {
+    color: var(--color-text);
+  }
+
+  .site-header__mark {
+    fill: var(--color-gold);
+  }
 }
 
 .locale-switcher ul {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem;
+  gap: 0.15rem;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -111,18 +168,31 @@ a {
 .locale-switcher a {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   min-height: 44px;
   min-width: 44px;
-  padding: 0 0.6rem;
-  border-radius: var(--radius);
+  padding: 0 0.7rem;
+  border-radius: 999px;
   color: var(--color-text);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.locale-switcher a:hover {
+  background: var(--color-chip);
 }
 
 .locale-switcher a[aria-current="true"] {
   font-weight: 700;
-  text-decoration: none;
-  border: 2px solid currentColor;
+  background: var(--color-green);
+  color: var(--color-green-text);
 }
+
+.locale-switcher__code {
+  display: none;
+}
+
+/* ---------- Page ---------- */
 
 main {
   max-width: 48rem;
@@ -134,45 +204,51 @@ main:focus {
   outline: none;
 }
 
+h1,
+h2,
+h3 {
+  font-family: var(--font-head);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
 h1 {
-  font-size: clamp(1.6rem, 4vw, 2.2rem);
-  line-height: 1.2;
+  font-size: clamp(1.75rem, 4vw, 2.6rem);
+  margin: 0.5rem 0 0.6rem;
+}
+
+h2 {
+  font-size: 1.35rem;
+  margin: 2rem 0 0.6rem;
 }
 
 .lead {
   font-size: 1.1rem;
+  color: var(--color-muted);
+  margin: 0 0 1.25rem;
 }
 
 .muted {
   color: var(--color-muted);
 }
 
-.market-list {
-  list-style: none;
-  padding: 0;
-  display: grid;
-  gap: var(--space);
+.page-intro h1 {
+  margin-top: 0.25rem;
 }
 
-.market-list__item {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: var(--space);
+.page-intro .lead {
+  margin-bottom: 1rem;
 }
 
-.market-list__item p {
-  margin: 0.25rem 0 0;
-}
-
-.market-list__name {
-  font-size: 1.15rem;
-  margin: 0;
-}
+/* ---------- Badges and buttons ---------- */
 
 .badge {
-  display: inline-block;
-  padding: 0.25rem 0.6rem;
-  border-radius: var(--radius);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
   font-weight: 600;
 }
 
@@ -189,27 +265,259 @@ h1 {
 .button {
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
-  padding: 0 1rem;
-  border-radius: var(--radius);
-  background: var(--color-accent);
-  color: var(--color-bg);
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0 1.25rem;
+  border: 2px solid var(--color-burgundy);
+  border-radius: 999px;
+  background: var(--color-burgundy);
+  color: var(--color-burgundy-text);
+  font: inherit;
   font-weight: 600;
   text-decoration: none;
+  cursor: pointer;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+.button:hover {
+  filter: brightness(1.1);
+}
+
+.button--secondary {
+  background: var(--color-surface);
+  color: var(--color-accent);
+  border-color: currentColor;
+}
+
+.button--green {
+  background: var(--color-green);
+  border-color: var(--color-green);
+  color: var(--color-green-text);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* ---------- Market list ---------- */
+
+.market-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.market-list__item {
+  position: relative;
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  box-shadow: var(--shadow);
+}
+
+.market-list:not(.explorer__list) .market-list__item {
+  display: block;
+}
+
+/* Calendar stamp with the opening day: decoration, the dates are in the text. */
+.market-list__stamp {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4.25rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-burgundy);
+  color: var(--color-burgundy-text);
+  font-family: var(--font-head);
+  line-height: 1;
+}
+
+.market-list__day {
+  font-size: 1.65rem;
+  font-weight: 700;
+}
+
+.market-list__month {
+  margin-top: 0.2rem;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.market-list__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.market-list__item p {
+  margin: 0.25rem 0 0;
+}
+
+.market-list__city {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-green);
+}
+
+@media (prefers-color-scheme: dark) {
+  .market-list__city {
+    color: #9fd8b8;
   }
 }
 
-/* ---------- Map + list (stage 2) ---------- */
+.market-list__item .market-list__city {
+  margin: 0;
+}
+
+.market-list__name {
+  margin: 0.15rem 0 0;
+  font-size: 1.2rem;
+}
+
+.market-list__name a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.market-list__name a:hover,
+.market-list__name a:focus-visible {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+.market-list__dates {
+  color: var(--color-muted);
+}
+
+.market-list__item .badge {
+  margin-top: 0.5rem;
+}
+
+.market-list__select {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.7rem;
+  min-height: 40px;
+  padding: 0 0.9rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.market-list__select:hover {
+  border-color: var(--color-text);
+}
+
+.market-list__select .icon {
+  fill: var(--color-burgundy);
+}
+
+.market-list__select[aria-pressed="true"] {
+  background: var(--color-green);
+  border-color: var(--color-green);
+  color: var(--color-green-text);
+}
+
+.market-list__select[aria-pressed="true"] .icon {
+  fill: currentColor;
+}
+
+.market-list__item[data-selected] {
+  outline: 3px solid var(--color-green);
+  outline-offset: -1px;
+}
+
+.market-list__selected {
+  margin-left: 0.5rem;
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+/* ---------- Filters ---------- */
+
+.filters {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.filters legend {
+  float: left;
+  margin-right: 0.25rem;
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+.filters label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex: none;
+  min-height: 44px;
+  padding: 0 1rem 0 0.8rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.filters label:hover {
+  border-color: var(--color-text);
+}
+
+/* Checked = filled + bold + the radio dot: not colour alone. */
+.filters label:has(input:checked) {
+  background: var(--color-green);
+  border-color: var(--color-green);
+  color: var(--color-green-text);
+  font-weight: 700;
+}
+
+.filters input {
+  width: 1.05rem;
+  height: 1.05rem;
+  margin: 0;
+  accent-color: var(--color-gold);
+}
+
+.filters label:has(input:focus-visible) {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.explorer__empty {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+/* ---------- Map ---------- */
 
 .explorer {
   display: grid;
@@ -218,52 +526,20 @@ h1 {
 
 .explorer__switch {
   display: none;
-  gap: 0.5rem;
-}
-
-.explorer__switch button,
-.market-list__select {
-  min-height: 44px;
-  padding: 0 1rem;
-  border: 2px solid var(--color-text);
-  border-radius: var(--radius);
-  background: var(--color-bg);
-  color: var(--color-text);
-  font: inherit;
-  cursor: pointer;
-}
-
-.explorer__switch button[aria-pressed="true"],
-.market-list__select[aria-pressed="true"] {
-  background: var(--color-text);
-  color: var(--color-bg);
-  font-weight: 700;
-}
-
-.market-list__select {
-  margin-top: 0.5rem;
-  min-height: 36px;
-  font-size: 0.95rem;
-}
-
-.market-list__item[data-selected] {
-  border: 3px solid var(--color-text);
-}
-
-.market-list__selected {
-  margin-left: 0.5rem;
-  font-weight: 700;
 }
 
 .explorer__map {
   position: relative;
-  min-height: 420px;
+  min-height: 360px;
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid var(--color-border);
+  background: #f3ede2;
+  box-shadow: var(--shadow);
 }
 
-.explorer__canvas {
+/* MapLibre's own CSS sets .maplibregl-map { position: relative }; keep ours. */
+.explorer .explorer__canvas {
   position: absolute;
   inset: 0;
 }
@@ -277,122 +553,317 @@ h1 {
   color: var(--color-warn-text);
 }
 
-.maplibregl-popup-content a {
-  color: var(--color-accent);
-}
-
-.maplibregl-popup-content {
-  color: #1b1b1f;
-}
-
-.actions {
+/* Pins: burgundy drop with a stall; label bubble when zoomed in or picked. */
+.map-pin {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-}
-
-.button--secondary {
-  background: var(--color-bg);
-  color: var(--color-accent);
-  border: 2px solid var(--color-accent);
-}
-
-@media (min-width: 900px) {
-  main:has(.explorer) {
-    max-width: 80rem;
-  }
-
-  .explorer {
-    grid-template-columns: minmax(20rem, 2fr) 3fr;
-    align-items: start;
-  }
-
-  .explorer__list {
-    max-height: 75vh;
-    overflow-y: auto;
-    margin: 0;
-    padding-right: 0.25rem;
-  }
-
-  .explorer__map {
-    position: sticky;
-    top: var(--space);
-    height: 75vh;
-  }
-}
-
-@media (max-width: 899px) {
-  .explorer__switch {
-    display: flex;
-  }
-
-  .explorer[data-view="list"] .explorer__map,
-  .explorer[data-view="map"] .explorer__list {
-    display: none;
-  }
-
-  .explorer__map {
-    height: 70vh;
-  }
-}
-
-/* ---------- Filters and status (stage 3) ---------- */
-
-.filters {
-  grid-column: 1 / -1;
-  display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  margin: 0;
-  padding: 0;
-  border: 0;
+  font-family: var(--font-body);
 }
 
-.filters legend {
-  float: left;
-  margin-right: 0.5rem;
+.map-pin__label {
+  display: none;
+  position: relative;
+  max-width: 13rem;
+  margin-bottom: 0.5rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 12px;
+  background: #fffaf1;
+  color: #211c17;
+  box-shadow: 0 4px 14px rgb(40 28 10 / 18%);
+  line-height: 1.25;
+  text-align: left;
+}
+
+.map-pin__label::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  width: 12px;
+  height: 12px;
+  background: inherit;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.map-pin__label strong {
+  display: block;
+  overflow: hidden;
+  font-family: var(--font-head);
+  font-size: 0.9rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.map-pin__label span {
+  font-size: 0.8rem;
+  color: #5f574d;
+}
+
+[data-labels] .map-pin__label,
+.map-pin[data-selected] .map-pin__label {
+  display: block;
+}
+
+.map-pin__dot {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 3px solid #fffaf1;
+  border-radius: 50% 50% 50% 0;
+  background: #8b1e2d;
+  box-shadow: 0 4px 12px rgb(60 10 20 / 35%);
+  transform: rotate(-45deg);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.map-pin__dot svg {
+  width: 20px;
+  height: 20px;
+  fill: #fffaf1;
+  transform: rotate(45deg);
+}
+
+.map-pin[data-selected] {
+  z-index: 2;
+}
+
+.map-pin[data-selected] .map-pin__dot {
+  background: #1f4a36;
+  transform: rotate(-45deg) scale(1.15);
+}
+
+.maplibregl-ctrl-group {
+  border-radius: 14px !important;
+  box-shadow: var(--shadow) !important;
+}
+
+/* ---------- Market card on the map ---------- */
+
+.sheet {
+  position: absolute;
+  z-index: 3;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  display: grid;
+  grid-template-columns: minmax(7.5rem, 38%) 1fr;
+  gap: 0.9rem;
+  padding: 0.7rem;
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: var(--shadow-lift);
+}
+
+.sheet__media {
+  position: relative;
+  overflow: hidden;
+  min-height: 8.5rem;
+  border-radius: var(--radius-sm);
+  background: #16294a;
+}
+
+.sheet__media .hero-scene,
+.sheet__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* "AI-generated" is always visible on the picture itself. */
+.sheet__label {
+  position: absolute;
+  left: 0.4rem;
+  bottom: 0.4rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: rgb(20 16 12 / 78%);
+  color: #fff;
+  font-size: 0.72rem;
   font-weight: 600;
 }
 
-.filters label {
+.sheet__body {
+  min-width: 0;
+  padding-right: 2rem;
+}
+
+.sheet__title {
+  margin: 0.1rem 0 0.4rem;
+  font-family: var(--font-head);
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.sheet__facts {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0 0 0.7rem;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9rem;
+}
+
+.sheet__facts li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+}
+
+.sheet__facts .icon {
+  margin-top: 0.15em;
+  color: var(--color-muted);
+}
+
+.sheet__kind {
+  color: var(--color-green);
+  font-weight: 600;
+}
+
+.sheet__kind .icon {
+  color: inherit !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .sheet__kind {
+    color: #9fd8b8;
+  }
+}
+
+.sheet__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.9rem;
+}
+
+.sheet__actions .button {
+  flex: 1 1 9rem;
+}
+
+.sheet__send-photo {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
   min-height: 44px;
-  padding: 0 0.9rem;
-  border: 2px solid var(--color-border);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.sheet__close {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
   border-radius: 999px;
+  background: transparent;
+  color: var(--color-muted);
   cursor: pointer;
 }
 
-.filters label:has(input:checked) {
-  border-color: var(--color-text);
-  font-weight: 700;
+.sheet__close:hover {
+  background: var(--color-chip);
 }
 
-.filters input {
-  width: 1.1rem;
-  height: 1.1rem;
-  accent-color: var(--color-accent);
+/* ---------- Illustration (used when a market has no photo) ---------- */
+
+.hero-scene {
+  display: block;
 }
 
-.filters label:has(input:focus-visible) {
-  outline: 3px solid var(--focus);
-  outline-offset: 2px;
+.hs-house--1 {
+  fill: #1a2740;
+}
+.hs-house--2 {
+  fill: #22314f;
+}
+.hs-house--3 {
+  fill: #1d2b47;
+}
+.hs-house--4 {
+  fill: #263858;
+}
+.hs-house--5 {
+  fill: #18233a;
+}
+.hs-win {
+  fill: #ffcf6e;
+}
+.hs-win--off {
+  fill: #2e3f60;
+}
+.hs-snow {
+  fill: none;
+  stroke: #e8eef8;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.hs-tree {
+  fill: #1f5a3f;
+}
+.hs-trunk {
+  fill: #4a2c1d;
+}
+.hs-star {
+  fill: #f2c35b;
+}
+.hs-stripe-a {
+  fill: #b3172f;
+}
+.hs-stripe-b,
+.hs-stall-counter {
+  fill: #f5ecdc;
+}
+.hs-stall-body {
+  fill: #3b2a22;
+}
+.hs-ground {
+  fill: #e8eef8;
+}
+.hs-moon {
+  fill: #fff2c8;
+}
+.hs-wire {
+  fill: none;
+  stroke: rgb(0 0 0 / 45%);
+  stroke-width: 1.5;
+}
+.hs-bulb--1 {
+  fill: #ffd257;
+}
+.hs-bulb--2 {
+  fill: #ff6b6b;
+}
+.hs-bulb--3 {
+  fill: #7ee0a0;
+}
+.hs-bulb--4 {
+  fill: #8fc3ff;
+}
+.hs-halo {
+  opacity: 0.75;
 }
 
-.explorer__empty {
-  grid-column: 1 / -1;
-  margin: 0;
-}
+/* ---------- Status ---------- */
 
 .status {
-  display: inline-block;
-  padding: 0.25rem 0.6rem;
-  border-radius: var(--radius);
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
   font-weight: 700;
-  border: 2px solid currentColor;
+  border: 1.5px solid currentColor;
 }
 
 .status--openNow {
@@ -407,13 +878,618 @@ h1 {
   background: var(--color-warn-bg);
 }
 
+/* ---------- Market page ---------- */
+
+.market-page > p:first-of-type a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 600;
+}
+
+.market-page > p:first-of-type a::before {
+  content: "←";
+  margin-right: 0.4rem;
+}
+
+.market-page ul {
+  padding-left: 1.2rem;
+}
+
+.market-page li {
+  margin: 0.2rem 0;
+}
+
+.market-page > .actions {
+  margin-top: 2rem;
+}
+
+.market-facts {
+  display: grid;
+  gap: 0.85rem;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.market-facts__card {
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--color-border);
+  border-top: 4px solid var(--color-green);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  box-shadow: var(--shadow);
+}
+
+.market-facts__card h2 {
+  margin-top: 0;
+  font-size: 1.15rem;
+}
+
+.market-facts__card p,
+.market-facts__card ul {
+  margin: 0.4rem 0;
+}
+
+@media (min-width: 700px) {
+  .market-facts {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 .install-tip {
   margin-block: 1.5rem;
-  padding: 1rem;
-  border: 2px solid #a3122a;
-  border-radius: 0.5rem;
+  padding: 1.25rem;
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-green);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  box-shadow: var(--shadow);
 }
 
 .install-tip h2 {
   margin-top: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Wide screens: list left, map right ---------- */
+
+@media (min-width: 900px) {
+  main:has(.explorer) {
+    max-width: 84rem;
+  }
+
+  .explorer {
+    grid-template-columns: minmax(22rem, 2fr) 3fr;
+    gap: 1.25rem;
+    align-items: start;
+  }
+
+  .explorer__list {
+    grid-column: 1;
+    grid-row: 2;
+    max-height: calc(100vh - var(--header-h) - 2rem);
+    overflow-y: auto;
+    padding: 0.25rem 0.5rem 0.5rem 0.25rem;
+    margin: -0.25rem 0 0 -0.25rem;
+  }
+
+  .explorer__map {
+    grid-column: 2;
+    grid-row: 2;
+    position: sticky;
+    top: calc(var(--header-h) + var(--space));
+    height: calc(100vh - var(--header-h) - 2rem);
+  }
+
+  .explorer__empty + .explorer__map,
+  .explorer__empty ~ .explorer__list {
+    grid-row: 3;
+  }
+
+  /* Top-left on wide screens, so it is visible before the page scrolls. */
+  .sheet {
+    top: 0.75rem;
+    bottom: auto;
+    right: auto;
+    width: min(32rem, calc(100% - 4.5rem));
+  }
+}
+
+/* ---------- Phones and narrow tablets: the map comes first ---------- */
+
+@media (max-width: 899px) {
+  .locale-switcher__code {
+    display: inline;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  .locale-switcher__name {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .locale-switcher a {
+    padding: 0 0.45rem;
+  }
+
+  .site-header__home {
+    font-size: 1.25rem;
+  }
+
+  main {
+    padding: 0.5rem var(--space) var(--space);
+  }
+
+  /* Room for the floating Map / List switch. */
+  main:has(.explorer) {
+    padding-bottom: 6rem;
+  }
+
+  .page-intro h1 {
+    font-size: 1.6rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .page-intro .lead {
+    font-size: 0.98rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .explorer {
+    gap: 0.75rem;
+  }
+
+  /* Filter chips scroll sideways instead of wrapping into a tall block. */
+  .filters {
+    overflow-x: auto;
+    margin-inline: calc(-1 * var(--space));
+    padding: 0.25rem var(--space) 0.5rem;
+    scrollbar-width: none;
+  }
+
+  .filters label {
+    padding: 0 0.85rem 0 0.7rem;
+    font-size: 0.95rem;
+  }
+
+  .filters legend {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* Map / List: a floating segmented control at the bottom, thumb-reach. */
+  .explorer__switch {
+    position: fixed;
+    left: 50%;
+    bottom: calc(1rem + env(safe-area-inset-bottom));
+    z-index: 15;
+    display: flex;
+    gap: 0.25rem;
+    padding: 0.3rem;
+    transform: translateX(-50%);
+    border-radius: 999px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    box-shadow: 0 8px 24px rgb(40 28 10 / 25%);
+  }
+
+  .explorer__switch button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    min-height: 44px;
+    min-width: 6.5rem;
+    padding: 0 1.1rem;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-text);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .explorer__switch button[aria-pressed="true"] {
+    background: var(--color-green);
+    color: var(--color-green-text);
+    font-weight: 700;
+  }
+
+  .explorer[data-view="list"] .explorer__map,
+  .explorer[data-view="map"] .explorer__list {
+    display: none;
+  }
+
+  /* Edge to edge, like an app. */
+  .explorer__map {
+    margin-inline: calc(-1 * var(--space));
+    border-radius: 0;
+    border-inline: 0;
+    height: 58dvh;
+    min-height: 360px;
+  }
+
+  .explorer[data-view="map"] .explorer__map {
+    height: calc(100dvh - var(--header-h) - 8.5rem);
+  }
+
+  .sheet {
+    left: 0.5rem;
+    right: 0.5rem;
+    bottom: 0.5rem;
+  }
+
+  .market-list__name {
+    font-size: 1.1rem;
+  }
+
+  /* Main actions of a market stay under the thumb while reading. */
+  .market-page > .actions {
+    position: sticky;
+    bottom: 0;
+    z-index: 5;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    margin-inline: calc(-1 * var(--space));
+    padding: 0.75rem var(--space) calc(0.75rem + env(safe-area-inset-bottom));
+    background: var(--color-bg);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .market-page > .actions .button {
+    flex: 1 1 0;
+    padding: 0 0.75rem;
+    white-space: nowrap;
+  }
+}
+
+/* ---------- Phone tweaks for the map card and full-screen map ---------- */
+
+@media (max-width: 899px) {
+  /* Full-screen map: the title stays for screen readers only. */
+  main:has(.explorer[data-view="map"]) .page-intro {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .explorer[data-view="map"] .explorer__map {
+    height: calc(100dvh - var(--header-h) - 10rem);
+  }
+
+  .sheet {
+    grid-template-columns: 6.5rem 1fr;
+    gap: 0.75rem;
+    padding: 0.6rem;
+  }
+
+  .sheet__media {
+    min-height: 7.5rem;
+  }
+
+  .sheet__title {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    font-size: 1.05rem;
+  }
+
+  .sheet__facts {
+    font-size: 0.85rem;
+    gap: 0.15rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .sheet__actions .button {
+    min-height: 44px;
+  }
+}
+
+/* ---------- Light map preview until MapLibre loads ---------- */
+
+.map-preview {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60% 50% at 30% 40%, #e3e8d3 0, transparent 70%),
+    radial-gradient(40% 30% at 70% 70%, #e6dfcf 0, transparent 70%), #f1ebdf;
+}
+
+.map-preview__pin {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border: 3px solid #fffaf1;
+  border-radius: 50% 50% 50% 0;
+  background: #8b1e2d;
+  box-shadow: 0 3px 8px rgb(60 10 20 / 30%);
+  transform: translate(-50%, -100%) rotate(-45deg);
+}
+
+/* ---------- Festive banner behind the title and filters ---------- */
+
+.hero-backdrop {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 18.5rem;
+  overflow: hidden;
+  background: linear-gradient(180deg, #0f1d33 0%, #1d3157 70%, #2b4069 100%);
+  pointer-events: none;
+}
+
+/* Our drawn town on the right; the left stays calm under the text. */
+.hero-backdrop .hero-scene {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: min(72rem, 75%);
+  height: 100%;
+}
+
+.hero-backdrop__img {
+  object-fit: cover;
+  object-position: right center;
+}
+
+/* Darkens the left for the text, fades the bottom into the page. */
+.hero-backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgb(12 22 40 / 92%) 0%, rgb(12 22 40 / 70%) 38%, transparent 65%),
+    linear-gradient(180deg, transparent 72%, var(--color-bg) 100%);
+}
+
+/* Snow over the banner. */
+.hero-backdrop::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image:
+    radial-gradient(circle, rgb(255 255 255 / 80%) 0 1.5px, transparent 2.3px),
+    radial-gradient(circle, rgb(255 255 255 / 55%) 0 1.1px, transparent 2px);
+  background-size:
+    120px 140px,
+    80px 95px;
+  background-position:
+    0 0,
+    40px 50px;
+}
+
+main:has(.hero-backdrop) .page-intro h1 {
+  color: #fffaf1;
+  text-shadow: 0 2px 16px rgb(0 0 0 / 40%);
+}
+
+main:has(.hero-backdrop) .page-intro .lead {
+  color: #ece4d6;
+}
+
+main:has(.hero-backdrop) .filters legend {
+  color: #fffaf1;
+}
+
+main:has(.hero-backdrop) .page-intro {
+  padding-top: 1.5rem;
+}
+
+@media (min-width: 900px) {
+  main:has(.hero-backdrop) .page-intro h1 {
+    font-size: clamp(2.4rem, 4vw, 3.4rem);
+  }
+}
+
+@media (max-width: 899px) {
+  .hero-backdrop {
+    height: 21rem;
+  }
+
+  .hero-backdrop .hero-scene {
+    width: 100%;
+    opacity: 0.55;
+  }
+
+  main:has(.hero-backdrop) .page-intro {
+    padding-top: 0.75rem;
+  }
+
+  main:has(.explorer[data-view="map"]) .hero-backdrop {
+    height: 7rem;
+  }
+}
+
+/* ---------- Filter pills with icons ---------- */
+
+.filters label {
+  position: relative;
+  gap: 0.5rem;
+  padding: 0 1.1rem;
+  border-color: transparent;
+  background: #fffaf1;
+  color: #211c17;
+}
+
+/* The radio covers the whole pill: invisible, but it is what you click. */
+.filters .filters__radio {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.filters label .icon {
+  color: #5f574d;
+}
+
+.filters label:has(input:checked) {
+  background: var(--color-burgundy);
+  border-color: #fffaf1;
+  color: var(--color-burgundy-text);
+  box-shadow: 0 4px 14px rgb(139 30 45 / 35%);
+}
+
+.filters label:has(input:checked) .icon {
+  color: currentColor;
+}
+
+/* ---------- List cards with a picture ---------- */
+
+.explorer__list .market-list__item {
+  display: grid;
+  grid-template-columns: 9.5rem 1fr;
+  gap: 1rem;
+  padding: 0.75rem 3rem 0.75rem 0.75rem;
+}
+
+.market-list__thumb {
+  position: relative;
+  overflow: hidden;
+  min-height: 8rem;
+  border-radius: var(--radius-sm);
+  background: #16294a;
+}
+
+.market-list__thumb .hero-scene,
+.market-list__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.market-list__thumb .market-list__stamp {
+  position: absolute;
+  top: 0.4rem;
+  left: 0.4rem;
+  width: 3.1rem;
+  height: 3.3rem;
+  border: 2px solid #fffaf1;
+  box-shadow: 0 3px 8px rgb(0 0 0 / 30%);
+}
+
+.market-list__thumb .market-list__day {
+  font-size: 1.3rem;
+}
+
+.market-list__thumb .market-list__month {
+  font-size: 0.62rem;
+}
+
+.market-list__ai {
+  position: absolute;
+  right: 0.35rem;
+  bottom: 0.35rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  background: rgb(20 16 12 / 78%);
+  color: #fff;
+  font-size: 0.66rem;
+  font-weight: 600;
+}
+
+.explorer__list .market-list__city {
+  color: var(--color-burgundy);
+}
+
+@media (prefers-color-scheme: dark) {
+  .explorer__list .market-list__city {
+    color: var(--color-accent);
+  }
+}
+
+.market-list__dates {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  font-size: 0.92rem;
+}
+
+.market-list__dates .icon {
+  margin-top: 0.2em;
+  color: var(--color-burgundy);
+}
+
+.market-list__fav {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.market-list__fav .icon {
+  width: 1.4rem;
+  height: 1.4rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}
+
+/* Saved = filled gold star (shape changes, not only colour). */
+.market-list__fav[aria-pressed="true"] .icon {
+  fill: var(--color-gold);
+  stroke: #8a5a00;
+}
+
+.market-list__fav:hover {
+  background: var(--color-chip);
+}
+
+.explorer__list .market-list__item[data-selected] {
+  outline: 2px solid var(--color-burgundy);
+  background: color-mix(in srgb, var(--color-burgundy) 6%, var(--color-surface));
+}
+
+@media (max-width: 899px) {
+  .explorer__list .market-list__item {
+    grid-template-columns: 6.75rem 1fr;
+    gap: 0.75rem;
+    padding: 0.6rem 2.75rem 0.6rem 0.6rem;
+  }
+
+  .market-list__thumb {
+    min-height: 7rem;
+  }
 }

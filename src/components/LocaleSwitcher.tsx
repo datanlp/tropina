@@ -25,7 +25,9 @@ export function LocaleSwitcher() {
                 if (locale !== current) track("lang_change", { from: current, to: locale });
               }}
             >
-              {t(`names.${locale}`)}
+              {/* Phones show the short code; the full name stays in the link's name. */}
+              <span className="locale-switcher__code">{locale.toUpperCase()}</span>
+              <span className="locale-switcher__name">{t(`names.${locale}`)}</span>
             </Link>
           </li>
         ))}

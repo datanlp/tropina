@@ -23,6 +23,22 @@ const time = z.string().regex(/^(?:[01]\d|2[0-3]):[0-5]\d$/, "time: HH:MM, 00:00
 
 const weekday = z.union([1, 2, 3, 4, 5, 6, 7].map((n) => z.literal(n)));
 
+/**
+ * One picture per market, stored in /public. `source: "ai"` is always shown
+ * with a visible "AI-generated" label; user photos carry their author.
+ */
+const photoSchema = z
+  .strictObject({
+    src: z.string().regex(/^\/[^/]/, "photo.src: a path on this site, e.g. /photos/x.webp"),
+    alt: l10nSchema,
+    source: z.enum(["ai", "official", "user"]),
+    credit: text.optional(),
+  })
+  .refine((p) => p.source !== "user" || p.credit, {
+    message: "a user photo needs credit",
+    path: ["credit"],
+  });
+
 export const marketSchema = z
   .strictObject({
     id: z.string(),
@@ -65,6 +81,7 @@ export const marketSchema = z
     verified: z.boolean(),
     lastChecked: isoDate,
     suggestedBy: text.optional(),
+    photo: photoSchema.optional(),
   })
   .refine((m) => m.id === `${m.city.slug}-${m.slug}`, {
     message: "id must be `{city.slug}-{slug}`",

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env TROPINA_INCLUDE_TEST_DATA=1 TROPINA_INCLUDE_PLACEHOLDER_DATA=1 next dev",
+    "dev": "cross-env TROPINA_INCLUDE_TEST_DATA=1 TROPINA_INCLUDE_PLACEHOLDER_DATA=1 NEXT_PUBLIC_PHOTO_FORM_URL=https://example.com/tropina-photo-form next dev",
     "preview": "cross-env TROPINA_INCLUDE_PLACEHOLDER_DATA=1 npm run build && next start",
     "prebuild": "node scripts/copy-maplibre-worker.mjs && tsx scripts/validate-data.ts",
     "build": "next build",

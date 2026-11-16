@@ -57,7 +57,15 @@
     "showOnMap": "Show on map",
     "selected": "Selected",
     "openCard": "Open market page",
-    "mapUnavailable": "The map could not be loaded. All markets are in the list."
+    "mapUnavailable": "The map could not be loaded. All markets are in the list.",
+    "christmasMarket": "Christmas market",
+    "until": "until {date}",
+    "explore": "Explore",
+    "closeCard": "Close",
+    "sendPhoto": "Send your photo",
+    "aiPhoto": "AI-generated image",
+    "photoBy": "Photo: {name}",
+    "favorite": "Add {name} to favourites"
   },
   "MapUi": {
     "Map.Title": "Map",
