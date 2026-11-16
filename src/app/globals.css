@@ -1057,3 +1057,39 @@ body {
     max-width: none;
   }
 }
+
+/* ---------- Market page facts ---------- */
+
+.market-facts {
+  display: grid;
+  gap: 0.85rem;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.market-facts__card {
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--color-border);
+  border-top: 4px solid var(--color-accent);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  box-shadow: var(--shadow);
+}
+
+.market-facts__card h2 {
+  margin-top: 0;
+  font-size: 1.15rem;
+}
+
+.market-facts__card p {
+  margin: 0.4rem 0;
+}
+
+.market-facts__card ul {
+  margin: 0.4rem 0;
+}
+
+@media (min-width: 700px) {
+  .market-facts {
+    grid-template-columns: 1fr 1fr;
+  }
+}

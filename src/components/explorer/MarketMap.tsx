@@ -14,6 +14,8 @@ const POLAND: maplibregl.LngLatBoundsLike = [
 const SOURCE = "markets";
 const CLUSTER_MAX_ZOOM = 9;
 const ACCENT = "#a3122a";
+const NIGHT = "#0f1d33";
+const GOLD = "#f2c35b";
 
 maplibregl.setWorkerUrl(`/vendor/maplibre-gl-worker.mjs?v=${maplibregl.getVersion()}`);
 
@@ -92,10 +94,10 @@ export default function MarketMap({ pins, selected, visible, onSelect }: Props) 
         source: SOURCE,
         filter: ["has", "point_count"],
         paint: {
-          "circle-color": ACCENT,
-          "circle-radius": ["step", ["get", "point_count"], 16, 5, 20, 10, 24],
-          "circle-stroke-width": 2,
-          "circle-stroke-color": "#ffffff",
+          "circle-color": NIGHT,
+          "circle-radius": ["step", ["get", "point_count"], 17, 5, 21, 10, 25],
+          "circle-stroke-width": 3,
+          "circle-stroke-color": GOLD,
         },
       });
       map.addLayer({
@@ -108,7 +110,7 @@ export default function MarketMap({ pins, selected, visible, onSelect }: Props) 
           "text-font": ["Noto Sans Bold"],
           "text-size": 13,
         },
-        paint: { "text-color": "#ffffff" },
+        paint: { "text-color": GOLD },
       });
       map.addLayer({
         id: "markets",
@@ -118,13 +120,13 @@ export default function MarketMap({ pins, selected, visible, onSelect }: Props) 
         paint: {
           // Selected marker is bigger and has a dark ring, not only another colour.
           "circle-color": ACCENT,
-          "circle-radius": ["case", ["boolean", ["feature-state", "selected"], false], 12, 8],
-          "circle-stroke-width": ["case", ["boolean", ["feature-state", "selected"], false], 4, 2],
+          "circle-radius": ["case", ["boolean", ["feature-state", "selected"], false], 13, 9],
+          "circle-stroke-width": ["case", ["boolean", ["feature-state", "selected"], false], 5, 3],
           "circle-stroke-color": [
             "case",
             ["boolean", ["feature-state", "selected"], false],
-            "#1b1b1f",
-            "#ffffff",
+            NIGHT,
+            GOLD,
           ],
         },
       });

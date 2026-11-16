@@ -81,24 +81,29 @@ export default async function MarketPage({ params }: Props) {
         }}
       />
 
-      <h2>{t("dates")}</h2>
-      <p>
-        <SeasonDates season={m.season} />
-      </p>
-      <VerificationBadge verified={m.verified} />
-      <p className="muted">
-        {t("lastChecked", {
-          date: format.dateTime(calendarDate(m.lastChecked), { dateStyle: "long" }),
-        })}
-      </p>
-
-      <h2>{t("hours")}</h2>
-      <ul>
-        {m.openingHours.map((h, i) => (
-          <li key={i}>{t("hoursRow", { days: days(h.days), open: h.open, close: h.close })}</li>
-        ))}
-      </ul>
-      {m.hoursNote && <p>{m.hoursNote[locale]}</p>}
+      <div className="market-facts">
+        <section className="market-facts__card">
+          <h2>{t("dates")}</h2>
+          <p>
+            <SeasonDates season={m.season} />
+          </p>
+          <VerificationBadge verified={m.verified} />
+          <p className="muted">
+            {t("lastChecked", {
+              date: format.dateTime(calendarDate(m.lastChecked), { dateStyle: "long" }),
+            })}
+          </p>
+        </section>
+        <section className="market-facts__card">
+          <h2>{t("hours")}</h2>
+          <ul>
+            {m.openingHours.map((h, i) => (
+              <li key={i}>{t("hoursRow", { days: days(h.days), open: h.open, close: h.close })}</li>
+            ))}
+          </ul>
+          {m.hoursNote && <p>{m.hoursNote[locale]}</p>}
+        </section>
+      </div>
 
       {m.food.length > 0 && (
         <>
