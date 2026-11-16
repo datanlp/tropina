@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getFormatter, getLocale, getTranslations } from "next-intl/server";
+import { HeroScene } from "@/components/HeroScene";
 import { MarketsExplorer } from "@/components/explorer/MarketsExplorer";
 import type { MarketPin } from "@/components/explorer/types";
 import { markets } from "@/data/markets";
@@ -33,6 +34,8 @@ export default async function MarketsPage() {
     dates: format.dateTimeRange(calendarDate(m.season.start), calendarDate(m.season.end), {
       dateStyle: "long",
     }),
+    startDay: format.dateTime(calendarDate(m.season.start), { day: "numeric" }),
+    startMonth: format.dateTime(calendarDate(m.season.start), { month: "short" }),
     verified: m.verified,
     schedule: {
       season: m.season,
@@ -44,8 +47,11 @@ export default async function MarketsPage() {
   return (
     <>
       <div className="hero">
-        <h1>{t("title")}</h1>
-        <p className="lead">{t("intro")}</p>
+        <div className="hero__text">
+          <h1>{t("title")}</h1>
+          <p className="lead">{t("intro")}</p>
+        </div>
+        <HeroScene />
       </div>
       {pins.length > 0 ? <MarketsExplorer pins={pins} /> : <p>{t("empty")}</p>}
     </>

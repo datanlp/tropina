@@ -10,6 +10,9 @@ export type MarketPin = {
   lat: number;
   lng: number;
   dates: string;
+  /** Start date split for the calendar stamp, e.g. "28" + "Nov". */
+  startDay: string;
+  startMonth: string;
   verified: boolean;
   schedule: Schedule;
 };

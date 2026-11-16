@@ -77,22 +77,28 @@ export function MarketsExplorer({ pins }: { pins: MarketPin[] }) {
               className="market-list__item"
               data-selected={isSelected || undefined}
             >
-              <p className="market-list__city">{p.city}</p>
-              <h2 className="market-list__name">
-                <Link href={p.href}>{p.name}</Link>
-              </h2>
-              <p className="market-list__dates">{p.dates}</p>
-              {!p.verified && <UnverifiedNote />}
-              <button
-                type="button"
-                className="market-list__select"
-                aria-pressed={isSelected}
-                onClick={() => setSelected(p.id)}
-              >
-                <PinIcon />
-                {t("showOnMap")}
-              </button>
-              {isSelected && <span className="market-list__selected">{t("selected")}</span>}
+              <div className="market-list__stamp" aria-hidden="true">
+                <span className="market-list__day">{p.startDay}</span>
+                <span className="market-list__month">{p.startMonth}</span>
+              </div>
+              <div className="market-list__body">
+                <p className="market-list__city">{p.city}</p>
+                <h2 className="market-list__name">
+                  <Link href={p.href}>{p.name}</Link>
+                </h2>
+                <p className="market-list__dates">{p.dates}</p>
+                {!p.verified && <UnverifiedNote />}
+                <button
+                  type="button"
+                  className="market-list__select"
+                  aria-pressed={isSelected}
+                  onClick={() => setSelected(p.id)}
+                >
+                  <PinIcon />
+                  {t("showOnMap")}
+                </button>
+                {isSelected && <span className="market-list__selected">{t("selected")}</span>}
+              </div>
             </li>
           );
         })}
